@@ -17,7 +17,7 @@ import { Scatter } from 'react-chartjs-2'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import annotationPlugin from 'chartjs-plugin-annotation'
 
-
+ChartJS.register(LinearScale, PointElement, LineElement)
 
 const ScatterGraph = ({lista}) =>
 {
@@ -45,7 +45,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       backgroundColor: item.color,
       borderDash: [100, 100],
       pointStyle: (() => {
-        const teamImage = new Image(45, 45);
+        const teamImage = new Image(35, 35);
         teamImage.src = item.logo;
         return teamImage;
       })()
@@ -57,7 +57,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     
     
         responsive: true,
-        aspectRatio: 1.6,
+        maintainAspectRatio: false,
         
         borderColor: 'white',
         scales: 
@@ -131,6 +131,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       }
       useEffect (() =>
       {
+        
         ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, annotationPlugin, Title, SubTitle, ChartDataLabels)
         ChartJS.unregister(ChartDataLabels)
         if (chartRef != null)
@@ -140,11 +141,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       }, [])
 
     return (
-        <>
-        {
-            loading ? <p className='text-white'>Loading</p> :
+        <> 
             <Scatter options={options} data={data} ref={chartRef} />
-            }
         </>
     )
 }
