@@ -1,19 +1,10 @@
-'use client'
-
-import React, { ReactNode } from 'react';
-import Accordion from './Accordion';
+import React from 'react';
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { usePathname } from 'next/navigation';
 
-type Children = {children?: ReactNode}
-
-const Balloon = ({ items, children }: {items: Array<any>, children: any} ) => {
-    const path = usePathname()
-
-    return (
-    <div className=' my-auto'>
-        
+export default function Balloon({ items, children }: {items: Array<any>, children: any}) 
+{
+  return (
+    <div className=' my-auto'>        
             <div className="absolute px-5 py-2 bg-neutral-950 rounded-md border border-neutral-800 text-xs invisible group-hover:visible hover:visible">  
               <ul className="list-none ">
                 {items.map((item) => (
@@ -22,13 +13,11 @@ const Balloon = ({ items, children }: {items: Array<any>, children: any} ) => {
                             {item.label}
                         </Link>
                     </li>
-
                 ))}           
               </ul>
               {children}
             </div>
     </div>
-  );
-};
+  )
+}
 
-export default Balloon;
