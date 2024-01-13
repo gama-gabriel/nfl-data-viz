@@ -6,7 +6,7 @@ export default function Balloon({ items, children }: {items: Array<any>, childre
   return (
     <div className=' my-auto'>        
             <div className="absolute px-5 py-2 bg-neutral-950 rounded-md border border-neutral-800 text-xs invisible group-hover:visible hover:visible">  
-              <ul className="list-none ">
+              <ul className="list-none">
                 {items.map((item) => (
                     <li key={item.href}>
                         <Link href={item.href} className='block my-ayto py-2 text-stone-400 cursor-pointer hover:text-white'>
