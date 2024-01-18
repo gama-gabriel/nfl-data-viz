@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+
 import 
 {
   Chart as ChartJS,
@@ -12,19 +13,17 @@ import
   Title,
   SubTitle,
 } from 'chart.js'
-import { useRef, useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Bubble } from 'react-chartjs-2'
 import { Context } from 'chartjs-plugin-datalabels'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import annotationPlugin from 'chartjs-plugin-annotation'
 
-
+ChartJS.register(LinearScale, PointElement, LineElement)
 
 const BubbleGraph = ({pre_lista}) =>
-{
-    const chartRef = useRef(null)
-    const [loading, setLoading] = useState(true)
-
+{  
+    
     const lista = pre_lista.map(item => ({
         ...item,
         data: {
@@ -47,17 +46,18 @@ const BubbleGraph = ({pre_lista}) =>
         {
         data: [item.data],
         label: item.name,
-        backgroundColor: `${item['primary color']}99`,
+        backgroundColor: `${item['primary color']}`,
         pointStyle: 'circle',
-        borderColor: `${item['secondary color']}60`,
+        borderColor: `${item['secondary color']}`,
         borderWidth: 1,
         })),   
     }
+    
     const options = {
     
-    
+      
       responsive: true,
-      aspectRatio: 1.6,
+      maintainAspectRatio: false,
       
       borderColor: 'white',
       scales: 
@@ -96,6 +96,29 @@ const BubbleGraph = ({pre_lista}) =>
   
       plugins: 
       {
+        annotation: {
+          annotations: {
+            line1: {
+              type: 'line',
+              mode: 'vertical',
+              scaleID: 'x',
+              value: xAverage,
+              borderColor: 'grey',
+              borderWidth: 1,
+              drawTime: 'beforeDraw',
+            },
+            line2: {
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y',
+              value: yAverage,
+              borderColor: 'grey',
+              borderWidth: 1,
+              drawTime: 'beforeDraw',
+            },
+          }
+        },
+        
         legend:
         {
           display: false,
@@ -126,47 +149,35 @@ const BubbleGraph = ({pre_lista}) =>
           }
         },
   
-        annotation: {
-          annotations: [
-            {
-              type: 'line',
-              mode: 'vertical',
-              scaleID: 'x',
-              value: xAverage,
-              borderColor: 'grey',
-              borderWidth: 2,
-              
-            },
-            {
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y',
-              value: yAverage,
-              borderColor: 'grey',
-              borderWidth: 2,
-            },
-          ],
-        },
         
+        datalabels:
+        {
+          color: 'white',
+          formatter: function(_: any, context: any) 
+          {
+             return context.dataset.data[context.dataIndex].name;
+          },
+          anchor: 'start',
+          display: 'auto',
+          font:
+          {
+            size: 10,
+          }
+        
+        }
   
       },
     }
-      useEffect (() =>
-      {
-        ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, annotationPlugin, Title, SubTitle, ChartDataLabels)
-        if (chartRef != null)
-        {
-          setLoading(false)
-          console.log(lista.name)
-        }
-      }, [])
+    useEffect (() =>
+    {
+      ChartJS.register(Tooltip, Legend, Title, SubTitle, ChartDataLabels, annotationPlugin)
+      
+    }, [])
+  
 
     return (
-        <>
-        {
-            loading ? <p className='text-white'>Loading</p> :
-            <Bubble options={options} data={data} ref={chartRef} />
-            }
+        <>    
+            <Bubble options={options} data={data} />  
         </>
     )
 }
