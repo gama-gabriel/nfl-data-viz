@@ -1,74 +1,88 @@
 'use client'
+
 import React, { useState } from 'react';
-import arrow from '../../../public/arrow.svg'
-import Img from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence, stagger } from "framer-motion"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { NavigationMenuLink } from "@/components/ui/navigation-menu"
+import { cn } from "@/lib/utils"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import { ChevronDownIcon } from "@radix-ui/react-icons"
 
-const Accordion = ({ items }: {items: Array<number>}) => {
-    const [openIndices, setOpenIndices] = useState<Array<number>>([]);
-
-    const toggleItem = (index: number) => 
-    {
-        setOpenIndices((prevIndices) =>
-        prevIndices.includes(index) ? prevIndices.filter((i: any) => i !== index): [...prevIndices, index]
-        )
+const container = {
+  hidden: { opacity: 0, height: 0, width: 0 },
+  show: {
+    opacity: 1,
+    height: 'auto',
+    width: 'auto', 
+    transition: {
+      staggerChildren: 0.10,
+      delay: 0.005
     }
+  }
+  
+}
 
-    const container = {
-      hidden: { opacity: 0, height: 0, width: 0 },
-      show: {
-        opacity: 1,
-        height: 'auto',
-        width: 'auto', 
-        transition: {
-          staggerChildren: 0.10,
-          delay: 0.005
-        }
-      }
-      
-    }
+const son = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+}
 
-    const son = {
-      hidden: { opacity: 0 },
-      show: { opacity: 1 },
-    }
+const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
+  ({ className, title, children, ...props }, ref) => {
+return (
+  <motion.li variants={son}>
+    <NavigationMenuLink asChild>
+      <Link
+        ref={ref}
+        className={cn(
+          "block select-none space-y-1 rounded-md py-3 px-4 leading-none no-underline outline-none transition-colors hover:bg-neutral-800 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:bg-neutral-800 text-sm",
+          className
+        )}
+        {...props}
+      >
+        {title}
+      </Link>
+    </NavigationMenuLink>
+  </motion.li>
+)
+})
+ListItem.displayName = "ListItem"
+
+const Accordion = ({ items }: {items: object}) => {
+  const [open, setOpen] = useState(false)
 
   return (
-    <div>
-      {items.map((item: any, index: number) => (
-        <div key={index}>
-          <div
-            className={openIndices?.includes(index) ? 'block my-ayto py-2 text-stone-400 cursor-pointer font-bold hover:text-white' : 'block my-ayto py-2 text-stone-400 cursor-pointer hover:text-white'}
-            onClick={() => toggleItem(index)}
-          >
-            {item.title}
-            <Img src={arrow} width={10} height={10} alt='arrow' className={openIndices.includes(index) ? 'ms-6 my-1.5 float-right' : 'ms-6 my-1.5 float-right rotate-180'}></Img>
-          </div>
-          <AnimatePresence>
-          {openIndices.includes(index) && (
-            
-            <motion.ul variants={container}
-            initial="hidden"
-            animate="show"
-            exit={{ height: 0, opacity: 0, transition: { delay: 0.05 }}}>
-              {item.content.map((itemContent: string, contentIndex: number) => (
-
-                  <motion.li key={contentIndex} variants={son} >
-                    <Link href={`/${itemContent}`} key={contentIndex} className='flex my-ayto py-2 ms-3 text-stone-400 cursor-pointer hover:text-white'>
-                      {itemContent}
-                    </Link>
-                  </motion.li>
-              ))}
-            </motion.ul>
-            
-            
-          )}
-          </AnimatePresence>
+    <>
+      <Collapsible open={open} onOpenChange={setOpen}>
+        <div className="flex w-full items-center">
+          <CollapsibleTrigger asChild>
+            <button className="flex w-full rounded-md px-1 justify-between items-center group text-sm hover:bg-neutral-800 focus:font-bold py-3">
+              <span className="sr-only">Toggle</span>
+              {items.title}
+              <ChevronDownIcon className='h-4 w-4 transition duration-300 group-data-[state=open]:rotate-180' />
+            </button>
+          </CollapsibleTrigger>
         </div>
-      ))}
-    </div>
+        <CollapsibleContent className="data-[state=closed]:animate-collapsible-up">
+        <AnimatePresence>
+        <ScrollArea className="h-72 ">
+          <motion.ul variants={container}
+              initial="hidden"
+              animate="show"
+              exit={{ height: 0, opacity: 0, transition: { delay: 0.05 }}}>
+              {items.content.map((content) => (
+              <ListItem href="/docs" title={content} className='' key={content} />  
+              ))}
+          </motion.ul>
+          <ScrollBar className='bg-stone-900'/>
+        </ScrollArea>
+        </AnimatePresence>  
+        </CollapsibleContent>
+        
+      </Collapsible>
+    </>
   );
-};
+}
 
 export default Accordion;
