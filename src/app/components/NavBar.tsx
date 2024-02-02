@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Acc from "./Expandable";
 
 import Underline from "./Underline";
@@ -20,9 +20,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { useMotionValueEvent, useScroll, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const MotionImage = motion(Image);
-
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -31,13 +31,14 @@ const ListItem = React.forwardRef<
   return (
     <li className={cn("", className)}>
       <NavigationMenuLink asChild>
-        <a
+        <Link
           ref={ref}
           {...props}
+          href={props.href!}
           className="text-sm mx-auto block select-none space-y-1 rounded-md py-4 px-2 leading-none no-underline outline-none transition-colors hover:bg-neutral-950 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:bg-neutral-950"
         >
           {title}
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   );
@@ -49,17 +50,17 @@ export default function NavBar() {
     title: "Offensive situations",
     href: "offense",
     content: [
-      {text: "Pass", ref: 'pass'},
-      {text: "Run", ref: 'run'},
-      {text: "Dropback vs Rush", ref: 'dropback_rush'},
-      {text: "Success rate", ref: 'success_rate'},
-      {text: "Early downs", ref: 'early_downs'},
-      {text: "Late Downs", ref: 'late_downs'},
-      {text: "Screens", ref: 'screens'},
-      {text: "Trick plays", ref: 'trick_plays'},
-      {text: "Short yardage", ref: 'short_yards'},
-      {text: "Motion", ref: 'motion'},
-      {text: "No huddle", ref: 'no_huddle'},
+      { text: "Pass", ref: "pass" },
+      { text: "Run", ref: "run" },
+      { text: "Dropback vs Rush", ref: "dropback_rush" },
+      { text: "Success rate", ref: "success_rate" },
+      { text: "Early downs", ref: "early_downs" },
+      { text: "Late Downs", ref: "late_downs" },
+      { text: "Screens", ref: "screens" },
+      { text: "Trick plays", ref: "trick_plays" },
+      { text: "Short yardage", ref: "short_yards" },
+      { text: "Motion", ref: "motion" },
+      { text: "No huddle", ref: "no_huddle" },
     ],
   };
 
@@ -67,17 +68,17 @@ export default function NavBar() {
     title: "Defensive situations",
     href: "defense",
     content: [
-      {text: "Pass", ref: 'pass'},
-      {text: "Run", ref: 'run'},
-      {text: "Dropback vs Rush", ref: 'dropback_rush'},
-      {text: "Success rate", ref: 'success_rate'},
-      {text: "Early downs", ref: 'early_downs'},
-      {text: "Late Downs", ref: 'late_downs'},
-      {text: "Screens", ref: 'screens'},
-      {text: "Trick plays", ref: 'trick_plays'},
-      {text: "Short yardage", ref: 'short_yards'},
-      {text: "Motion", ref: 'motion'},
-      {text: "No huddle", ref: 'no_huddle'},
+      { text: "Pass", ref: "pass" },
+      { text: "Run", ref: "run" },
+      { text: "Dropback vs Rush", ref: "dropback_rush" },
+      { text: "Success rate", ref: "success_rate" },
+      { text: "Early downs", ref: "early_downs" },
+      { text: "Late Downs", ref: "late_downs" },
+      { text: "Screens", ref: "screens" },
+      { text: "Trick plays", ref: "trick_plays" },
+      { text: "Short yardage", ref: "short_yards" },
+      { text: "Motion", ref: "motion" },
+      { text: "No huddle", ref: "no_huddle" },
     ],
   };
   const { scrollY } = useScroll();
@@ -94,9 +95,6 @@ export default function NavBar() {
       }
     }
   });
-  function template({ y, z }: { y: number; z: number }) {
-    return `translateY(${y}) translateZ(${z})`;
-  }
 
   return (
     <motion.header
@@ -116,6 +114,7 @@ export default function NavBar() {
               width={20}
               height={20}
               alt={"NFL data viz logo"}
+              priority
               className="cursor-pointer my-auto mx-12 z-10"
               variants={{
                 visible: { scale: 1, opacity: 1 },
@@ -156,10 +155,10 @@ export default function NavBar() {
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
-                      <p className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
-                        <Underline selected="/" />
+                      <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                        <Underline selected="" />
                         Home
-                      </p>
+                      </div>
                     </NavigationMenuLink>
                   </Link>
                 </DropdownWrapper>
@@ -170,11 +169,20 @@ export default function NavBar() {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <DropdownWrapper className="">
-                  <NavigationMenuTrigger>General</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                      <Underline selected={"general"} />
+                      General
+                    </div>
+                  </NavigationMenuTrigger>
                 </DropdownWrapper>
                 <NavigationMenuContent className="">
                   <ul className="grid px-4 py-3 w-56">
-                    <ListItem href="/docs" title="Home" className=""></ListItem>
+                    <ListItem
+                      href="/general"
+                      title="Home"
+                      className=""
+                    ></ListItem>
                     <ListItem
                       href="/general/epa"
                       title="EPA"
@@ -197,11 +205,20 @@ export default function NavBar() {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <DropdownWrapper className="">
-                  <NavigationMenuTrigger>Teams</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                      <Underline selected={"teams"} />
+                      Teams
+                    </div>
+                  </NavigationMenuTrigger>
                 </DropdownWrapper>
                 <NavigationMenuContent>
                   <ul className="grid px-4 py-3 w-56">
-                    <ListItem href="/docs" title="Home" className=""></ListItem>
+                    <ListItem
+                      href="/teams"
+                      title="Home"
+                      className=""
+                    ></ListItem>
                     <ListItem
                       href="/docs/installation"
                       title="EPA"
@@ -223,13 +240,22 @@ export default function NavBar() {
             <NavigationMenuList className="gap-3">
               <NavigationMenuItem>
                 <DropdownWrapper className="">
-                  <NavigationMenuTrigger>Players</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                      <Underline selected={"players"} />
+                      Players
+                    </div>
+                  </NavigationMenuTrigger>
                 </DropdownWrapper>
                 <NavigationMenuContent>
                   <ul className="grid px-4 py-3 w-56">
-                    <ListItem href="/docs" title="Home" className=""></ListItem>
                     <ListItem
-                      href="/docs/installation"
+                      href="/players"
+                      title="Home"
+                      className=""
+                    ></ListItem>
+                    <ListItem
+                      href="/players/quarterbacks"
                       title="EPA"
                       className=""
                     ></ListItem>
@@ -244,7 +270,6 @@ export default function NavBar() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-
         </motion.div>
       </div>
     </motion.header>
