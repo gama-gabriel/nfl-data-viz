@@ -25,7 +25,6 @@ const container = {
   },
 };
 
-const MotionScroll = motion(ScrollArea)
 
 const son = {
   hidden: { opacity: 0 },
@@ -73,9 +72,9 @@ const Expandable = ({ items }: { items: object }) => {
             </button>
           </CollapsibleTrigger>
         </div>
-        <CollapsibleContent className="data-[state=closed]:animate-collapsible-up">
+        <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
           <AnimatePresence>
-            <MotionScroll initial={{ height: 0 }} animate={{height: '18rem'}} className="h-72">
+            <ScrollArea className="h-72">
               <motion.ul
                 variants={container}
                 initial='hidden'
@@ -92,7 +91,7 @@ const Expandable = ({ items }: { items: object }) => {
                 ))}
               </motion.ul>
               <ScrollBar className="bg-stone-900" />
-            </MotionScroll>
+            </ScrollArea>
           </AnimatePresence>
         </CollapsibleContent>
       </Collapsible>
