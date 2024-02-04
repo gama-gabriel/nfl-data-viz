@@ -8,7 +8,7 @@ import logo from "../../../public/logo.svg";
 import hamburger from "../resources/hamburger.svg";
 import Image from "next/image";
 import Link from "next/link";
-import DropdownWrapper from "./DropdownWrapper";
+import NavitemWrapper from "./NavitemWrapper";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -98,7 +98,7 @@ export default function NavBar() {
 
   return (
     <motion.header
-      className="sticky top-0 bg-neutral-900 border-b border-neutral-700 text-white text-sm"
+      className="sticky z-10 backdrop-blur top-0 bg-neutral-800/70 border-b border-neutral-700 text-white text-sm"
       variants={{
         visible: { y: 0, opacity: 1 },
         hidden: { y: -20 },
@@ -108,7 +108,7 @@ export default function NavBar() {
     >
       <div className="m-0 px-6 py-2 w-full gap-4 flex">
         <Link className="mx-12 my-auto group" href="/">
-          <DropdownWrapper initial={0.9}>
+          <NavitemWrapper initial={0.9}>
             <MotionImage
               src={logo}
               width={20}
@@ -136,7 +136,7 @@ export default function NavBar() {
               <span>nfl</span>
               <span className="font-bold"> data viz</span>
             </motion.p>
-          </DropdownWrapper>
+          </NavitemWrapper>
         </Link>
         <motion.div
           variants={{
@@ -150,7 +150,7 @@ export default function NavBar() {
           <NavigationMenu className="">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <DropdownWrapper className="">
+                <NavitemWrapper className="">
                   <Link href="/" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
@@ -161,21 +161,21 @@ export default function NavBar() {
                       </div>
                     </NavigationMenuLink>
                   </Link>
-                </DropdownWrapper>
+                </NavitemWrapper>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <NavigationMenu className="">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <DropdownWrapper className="">
+                <NavitemWrapper className="">
                   <NavigationMenuTrigger>
                     <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
                       <Underline selected={"general"} />
                       General
                     </div>
                   </NavigationMenuTrigger>
-                </DropdownWrapper>
+                </NavitemWrapper>
                 <NavigationMenuContent className="">
                   <ul className="grid px-4 py-3 w-56">
                     <ListItem
@@ -204,14 +204,14 @@ export default function NavBar() {
           <NavigationMenu className="">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <DropdownWrapper className="">
+                <NavitemWrapper className="">
                   <NavigationMenuTrigger>
                     <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
                       <Underline selected={"teams"} />
                       Teams
                     </div>
                   </NavigationMenuTrigger>
-                </DropdownWrapper>
+                </NavitemWrapper>
                 <NavigationMenuContent>
                   <ul className="grid px-4 py-3 w-56">
                     <ListItem
@@ -239,14 +239,14 @@ export default function NavBar() {
           <NavigationMenu className="">
             <NavigationMenuList className="gap-3">
               <NavigationMenuItem>
-                <DropdownWrapper className="">
+                <NavitemWrapper className="">
                   <NavigationMenuTrigger>
                     <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
                       <Underline selected={"players"} />
                       Players
                     </div>
                   </NavigationMenuTrigger>
-                </DropdownWrapper>
+                </NavitemWrapper>
                 <NavigationMenuContent>
                   <ul className="grid px-4 py-3 w-56">
                     <ListItem
