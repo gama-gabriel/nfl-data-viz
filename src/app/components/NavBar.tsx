@@ -2,10 +2,8 @@
 
 import React, { useState } from "react";
 import Acc from "./Expandable";
-
 import Underline from "./Underline";
 import logo from "../../../public/logo.svg";
-import hamburger from "../resources/hamburger.svg";
 import Image from "next/image";
 import Link from "next/link";
 import NavitemWrapper from "./NavitemWrapper";
@@ -20,7 +18,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { useMotionValueEvent, useScroll, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 
 const MotionImage = motion(Image);
 
@@ -104,7 +101,7 @@ export default function NavBar() {
         hidden: { y: -20 },
       }}
       animate={hidden ? "hidden" : "visible"}
-      transition={{ type: "spring", duration: 0.1 }}
+      transition={{ duration: 0.2 }}
     >
       <div className="m-0 px-6 py-2 w-full gap-4 flex">
         <Link className="mx-12 my-auto group" href="/">
@@ -118,7 +115,7 @@ export default function NavBar() {
               className="cursor-pointer my-auto mx-12 z-10"
               variants={{
                 visible: { scale: 1, opacity: 1 },
-                hidden: { scale: 0, opacity: 0 },
+                hidden: { scale: 0, opacity: 0,  transition: { duration: 0.2} },
               }}
               animate={hidden ? "hidden" : "visible"}
               transition={{ duration: 0.2 }}
@@ -131,7 +128,7 @@ export default function NavBar() {
                 hidden: { y: -9 },
               }}
               animate={hidden ? "hidden" : "visible"}
-              transition={{ ease: "easeOut", duration: 0.1 }}
+              transition={{ ease: "easeInOut", duration: 0.2 }}
             >
               <span>nfl</span>
               <span className="font-bold"> data viz</span>
@@ -144,7 +141,7 @@ export default function NavBar() {
             hidden: { y: 10 },
           }}
           animate={hidden ? "hidden" : "visible"}
-          transition={{ duration: 0.1, type: "spring" }}
+          transition={{ duration: 0.2 }}
           className="flex gap-3"
         >
           <NavigationMenu className="">
