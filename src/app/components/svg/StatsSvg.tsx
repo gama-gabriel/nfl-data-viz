@@ -12,7 +12,7 @@ export default function StatsSvg() {
         <g id="Group">
           <motion.path
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1, transition: { delay: 1, duration: 0.5 } }}
+            animate={{ pathLength: 1, transition: { delay: 0.2, duration: 0.5 } }}
             id="arrow"
             d="M16 42.5L46.5 12L54 19L71 2"
             stroke="#16FF00"
@@ -22,7 +22,7 @@ export default function StatsSvg() {
             initial={{ pathLength: 0 }}
             animate={{
               pathLength: 1,
-              transition: { delay: 1.5, duration: 0.2 },
+              transition: { delay: 0.7, duration: 0.2 },
             }}
             d="M62 1H72V10.5"
             stroke="#16ff00"
