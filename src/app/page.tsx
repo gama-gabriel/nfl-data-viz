@@ -44,8 +44,9 @@ export default function Menu() {
         </div>
       </motion.div>
 
-      <h2 className='w-fit h-fit mx-auto py-16 text-4xl font-bold'>Features</h2>
-      <motion.div className="flex mx-auto px-10 py-16 w-full gap-3 h-56 justify-center 2xl:w-full" ref={gridRef} animate={ gridView ? 'rest' : 'hidden'}>
+      <h2 className='w-fit h-fit mx-auto py-20 text-4xl font-bold' ref={gridRef}>Features</h2>
+
+      <motion.div className="flex mx-auto px-10 w-full gap-3 h-56 justify-center 2xl:w-full"  animate={ gridView ? 'rest' : 'hidden'}>
         <div className="px-4 w-[calc(30%)] ">
           <StatsSvg />
           <h2 className="font-bold text-2xl text-center p-3 ">
