@@ -1,53 +1,34 @@
-"use client";
+
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-export default function LogoSvg({ view }: { view: boolean }) {
-  const variants = {
-    hidden: {
-      y: 0,
-    },
-    show: {
-      y: 0,
-      transition: {
-        delay: 0.1,
-        duration: 0.2,
-      },
-    },
-  };
-
-  const ballVariants = {
-    hidden: { scale: 0, opacity: 0, x: -300, y: 200, rotate: -2500 },
-    rest: {
-      scale: 1,
-      opacity: 1,
-      x: 0,
-      y: 0,
-      rotate: 0,
-      transition: { duration: 2 },
-    },
-    hover: {
-      rotate: 2000,
-      x: 300,
-      y: -200,
-      transition: { duration: 2, ease: "easeIn" },
-    },
-  };
-
-  const divRef = useRef<HTMLDivElement>(null);
+export default function LogoSvg() {
+  const ref = useRef<HTMLDivElement>(null);
+  const view = useInView(ref, { margin: "-10% 0px -10% 0px" });
 
   return (
-    <div className=''>
+    <div className="" ref={ref}>
       <motion.svg
-        variants={variants}
+        variants={{
+          hidden: {
+            y: 0,
+          },
+          show: {
+            y: 0,
+            transition: {
+              delay: 0.1,
+              duration: 0.2,
+            },
+          },
+        }}
         initial="hidden"
         animate={view ? "rest" : "hidden"}
         whileHover="hover"
         viewBox="0 0 50 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className='h-80'
+        className="h-96"
       >
         <g id="logo">
           <motion.g

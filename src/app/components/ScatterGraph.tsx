@@ -1,8 +1,7 @@
-'use client'
+"use client";
 
-import React from 'react'
-import 
-{
+import React from "react";
+import {
   Chart as ChartJS,
   LinearScale,
   PointElement,
@@ -11,140 +10,189 @@ import
   Legend,
   Title,
   SubTitle,
-} from 'chart.js'
-import { useRef, useState, useEffect } from 'react'
-import { Scatter } from 'react-chartjs-2'
-import ChartDataLabels from 'chartjs-plugin-datalabels'
-import annotationPlugin from 'chartjs-plugin-annotation'
+} from "chart.js";
+import { useRef, useState, useEffect } from "react";
+import { Scatter } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+import annotationPlugin from "chartjs-plugin-annotation";
+import Img from "next/image";
+import { motion, useMotionValue } from "framer-motion";
+import logo from "../../../public/logo.svg";
 
-ChartJS.register(LinearScale, PointElement, LineElement)
+const MotionImage = motion(Img);
+ChartJS.register(LinearScale, PointElement, LineElement);
 
-const ScatterGraph = ({lista}) =>
-{
-    const chartRef = useRef(null)
-    const [loading, setLoading] = useState(true)
+const ScatterGraph = ({ lista }) => {
+  const chartRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+  const [dark, setDark] = useState(true);
 
-    
-      
-      const getAverage = (data, key) => {
-        const sum = data.reduce((acc, point) => acc + point[key], 0)
-        return sum / data.length
-      };
-      
-      const xAverage = getAverage(lista.map(item => item.data), 'x')
-      const yAverage = getAverage(lista.map(item => item.data), 'y')
-      
-      
-      let data = {};
-
-if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  data = {
-    datasets: lista.map(item => ({
-      data: [item.data],
-      label: item.name,
-      backgroundColor: item.color,
-      borderDash: [100, 100],
-      pointStyle: (() => {
-        const teamImage = new Image(35, 35);
-        teamImage.src = item.logo;
-        return teamImage;
-      })()
-    })),
+  const getAverage = (data, key) => {
+    const sum = data.reduce((acc, point) => acc + point[key], 0);
+    return sum / data.length;
   };
-}
 
-    const options = {
-    
-    
-        responsive: true,
-        maintainAspectRatio: false,
-        
-        borderColor: 'white',
-        scales: 
-        {
-          x: 
-          {
-            type: 'linear',
-            position: 'bottom',
-            reverse: true,
-            title: 
-            {
-              display: true,
-              text: `Offensive EPA/play`,
-            },
-          },
-    
-          y: 
-          {
-            type: 'linear',
-            position: 'left',
-            reverse: true,
-            title: 
-            {
-              display: true,
-              text: `Defensive EPA/play`,
-            },
-    
-            ticks:
-            {
-              color: 'white',
-              textStrokeColor: '#241773',
-              textStrokeWidth: 1,
-            },
+  const xAverage = getAverage(
+    lista.map((item) => item.data),
+    "x"
+  );
+  const yAverage = getAverage(
+    lista.map((item) => item.data),
+    "y"
+  );
+
+  let data = {};
+
+  if (typeof window !== "undefined" && typeof document !== "undefined") {
+    data = {
+      datasets: lista.map((item) => ({
+        data: [item.data],
+        label: item.name,
+        backgroundColor: item.color,
+        borderDash: [100, 100],
+        pointStyle: (() => {
+          const teamImage = new Image(35, 35);
+          teamImage.src = item.logo;
+          return teamImage;
+        })(),
+      })),
+    };
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    borderColor: "white",
+    scales: {
+      x: {
+        type: "linear",
+        position: "bottom",
+        reverse: false,
+        title: {
+          display: true,
+          text: `Offensive EPA/play`,
+        },
+      },
+
+      y: {
+        type: "linear",
+        position: "left",
+        reverse: true,
+        title: {
+          display: true,
+          text: `Defensive EPA/play`,
+          font: {
+            size: "10rem",
           },
         },
-    
-        plugins: 
-        {
-          legend:
-          {
-            display: false,
-          },
-    
-          subtitle:
-          {
-            display: true,
-            text: ['Weeks 1 - 13', `data: nflfastr`],
-            padding: 
-            {
-              bottom: 10,
-            },
-            font:
-            {
-              size: 16
-            },
-          },
-    
-          title:
-          {
-            display: true,
-            text: 'EPA/play - 2023',
-            color: 'white',
-            font:
-            {
-              size: 24,
-            }
-          },
-    
-    
+
+        ticks: {
+          color: "white",
+          textStrokeColor: "#241773",
+          textStrokeWidth: 1,
         },
-      }
-      useEffect (() =>
-      {
-        
-        ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, annotationPlugin, Title, SubTitle, ChartDataLabels)
-        ChartJS.unregister(ChartDataLabels)
-        if (chartRef != null)
-        {
-          setLoading(false)
-        }
-      }, [])
+      },
+    },
 
-    return (
-        <> 
-            <Scatter options={options} data={data} ref={chartRef} />
-        </>
-    )
-}
+    plugins: {
+      annotation: {
+        annotations: {
+          line1: {
+            type: "line",
+            mode: "vertical",
+            scaleID: "x",
+            value: xAverage,
+            borderColor: `${dark ? `#ffffff30` : `#000000`}`,
+            borderWidth: 1,
+            drawTime: "beforeDraw",
+          },
+          line2: {
+            type: "line",
+            mode: "horizontal",
+            scaleID: "y",
+            value: yAverage,
+            borderColor: `${dark ? `#ffffff30` : `#000000`}`,
+            borderWidth: 1,
+            drawTime: "beforeDraw",
+          },
+        },
+      },
+      legend: {
+        display: false,
+      },
+    },
+  };
+  useEffect(() => {
+    ChartJS.register(
+      LinearScale,
+      PointElement,
+      LineElement,
+      Tooltip,
+      Legend,
+      annotationPlugin,
+      ChartDataLabels
+    );
+    ChartJS.unregister(ChartDataLabels);
+    if (chartRef != null) {
+      setLoading(false);
+    }
+  }, []);
 
-export default ScatterGraph
+  const container = {
+    hidden: {
+      opacity: 1,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+  const son = {
+    hidden: { height: 0 },
+    visible: {
+      height: "auto",
+      transition: {
+        duration: 3,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+  const draw = {
+    hidden: { stroke: 0, opacity: 0 },
+    visible: (i) => {
+      const delay = 1 + i * 0.5;
+      return {
+        stroke: 1,
+        opacity: 1,
+        transition: {
+          stroke: { delay, type: "spring", duration: 1.5, bounce: 0 },
+          opacity: { delay, duration: 0.01 },
+        },
+      };
+    },
+  };
+  const pathLength = useMotionValue(0);
+
+  return (
+    <>
+      <div
+        className={`py-4 px-1 aspect-video md:w-[70%] ${
+          dark ? `bg-neutral-900` : `bg-white`
+        } rounded-lg w-full mx-auto my-2 min-w-0`}
+      >
+        {loading ? (
+          <div className="aspect-video animate-pulse rounded-3xl bg-neutral-800/50 dark:bg-neutral-50/10  min-w-0 "></div>
+        ) : (
+          <Scatter options={options} data={data} ref={chartRef} />
+        )}
+      </div>
+      
+      <div className="h-12"></div>
+    </>
+  );
+};
+
+export default ScatterGraph;

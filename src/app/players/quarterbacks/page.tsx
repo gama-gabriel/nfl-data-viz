@@ -1,7 +1,45 @@
-
-import React from 'react'
+'use client'
+import React, { Suspense } from 'react'
 import BubbleGraph from '../../components/BubbleGraph';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
+import { cn } from "@/lib/utils"
+import Link  from 'next/link'
+import { Skeleton } from "@/components/ui/skeleton"
 
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none bg-neutral-900 no-underline outline-none transition-colors hover:bg-zinc-300 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  )
+})
+ListItem.displayName = "ListItem"
 
 const isServer = typeof window === 'undefined';
 
@@ -50,11 +88,20 @@ function Home() {
   };
 
   return (
+    
     <>
-    <div className='  p-4  max-w-4xl mx-auto my-12 ' >
-      <BubbleGraph pre_lista={pre_lista}/>
-    </div>
+      <div className='py-4 px-1 aspect-video md:w-[70%] z-10 bg-black w-full mx-auto  my-12 min-w-0' >
+      {/* <Suspense fallback={<div className='aspect-video md:w-[70%] w-full mx-auto animate-pulse rounded-3xl bg-red-800/50 my-12 min-w-0 -z-10'/>}>*/}
+          <BubbleGraph pre_lista={pre_lista}/> 
+        {/* </Suspense> */}
+          
+      </div>
+      <div className='aspect-video md:w-[70%] w-full mx-auto animate-pulse rounded-3xl bg-neutral-800/50 dark:bg-neutral-50/10 my-12 min-w-0 -z-10'>
+      </div>
+          
+      <div className='animate-pulse bg-red-900 h-screen'></div>
     </>
+    
   );
 }
 

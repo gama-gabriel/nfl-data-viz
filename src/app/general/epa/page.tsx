@@ -1,19 +1,221 @@
-import React, { Suspense } from 'react'
-import ScatterGraph from '@/app/components/ScatterGraph'
+import React, { Suspense } from "react";
+import ScatterGraph from "@/app/components/ScatterGraph";
+import { Skeleton } from "@/components/ui/skeleton";
+import Img from "next/image";
 
-const lista =[{"data": {"x": 0.14416468511667213, "y": 0.8333333333333334}, "name": "ARI", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ari.png", "color": "#97233F"}, {"data": {"x": -0.013142925418907736, "y": 0.7684210526315789}, "name": "ATL", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/atl.png", "color": "#A71930"}, {"data": {"x": -0.08120778560805907, "y": 0.7692307692307693}, "name": "BAL", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/bal.png", "color": "#241773"}, {"data": {"x": 0.05855336294940199, "y": 0.8035714285714286}, "name": "BUF", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/buf.png", "color": "#00338D"}, {"data": {"x": 0.0677737010390071, "y": 0.7962962962962963}, "name": "CAR", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/car.png", "color": "#0085CA"}, {"data": {"x": 0.237460204985442, "y": 0.826530612244898}, "name": "CHI", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/chi.png", "color": "#0B162A"}, {"data": {"x": -0.05092547243680237, "y": 0.743801652892562}, "name": "CIN", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/cin.png", "color": "#FB4F14"}, {"data": {"x": -0.1843635865276941, "y": 0.6702127659574468}, "name": "CLE", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/cle.png", "color": "#FF3C00"}, {"data": {"x": -0.0004335475654345599, "y": 0.7482014388489209}, "name": "DAL", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/dal.png", "color": "#002244"}, {"data": {"x": 0.04271950891070249, "y": 0.7622950819672131}, "name": "DEN", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/den.png", "color": "#002244"}, {"data": {"x": 0.11631734866743677, "y": 0.7961165048543689}, "name": "DET", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png", "color": "#0076B6"}, {"data": {"x": 0.07236934371656377, "y": 0.7741935483870968}, "name": "GB", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png", "color": "#203731"}, {"data": {"x": 0.08752896800004117, "y": 0.7946428571428571}, "name": "HOU", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png", "color": "#03202F"}, {"data": {"x": 0.029576694602522307, "y": 0.7835820895522388}, "name": "IND", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ind.png", "color": "#002C5F"}, {"data": {"x": 0.21701511755077818, "y": 0.7846153846153846}, "name": "JAX", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png", "color": "#006778"}, {"data": {"x": -0.0396794071056852, "y": 0.7446808510638298}, "name": "KC", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/kc.png", "color": "#E31837"}, {"data": {"x": 0.12792214054166298, "y": 0.7454545454545455}, "name": "LA", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lar.png", "color": "#003594"}, {"data": {"x": -0.06941433241740715, "y": 0.7734375}, "name": "LAC", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png", "color": "#007BC7"}, {"data": {"x": 0.1860842933177397, "y": 0.8347826086956521}, "name": "LV", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lv.png", "color": "#000000"}, {"data": {"x": 0.05864378968425601, "y": 0.7627118644067796}, "name": "MIA", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/mia.png", "color": "#008E97"}, {"data": {"x": 0.13079793845188625, "y": 0.8064516129032258}, "name": "MIN", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/min.png", "color": "#4F2683"}, {"data": {"x": -0.016743120432161748, "y": 0.7192982456140351}, "name": "NE", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ne.png", "color": "#002244"}, {"data": {"x": -0.33594862585113255, "y": 0.6363636363636364}, "name": "NO", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/no.png", "color": "#D3BC8D"}, {"data": {"x": 0.06476787532808624, "y": 0.803921568627451}, "name": "NYG", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png", "color": "#0B2265"}, {"data": {"x": 0.10462193746393976, "y": 0.7448979591836735}, "name": "NYJ", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png", "color": "#003F2D"}, {"data": {"x": 0.395297836319395, "y": 0.8559322033898306}, "name": "PHI", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png", "color": "#004C54"}, {"data": {"x": 0.1937711443881349, "y": 0.7777777777777778}, "name": "PIT", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png", "color": "#000000"}, {"data": {"x": 0.18588437016053835, "y": 0.8198198198198198}, "name": "SEA", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/sea.png", "color": "#002244"}, {"data": {"x": 0.06796779501709539, "y": 0.8333333333333334}, "name": "SF", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/sf.png", "color": "#AA0000"}, {"data": {"x": -0.157439081692909, "y": 0.8017241379310345}, "name": "TB", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/tb.png", "color": "#A71930"}, {"data": {"x": 0.0653576313874778, "y": 0.7555555555555555}, "name": "TEN", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ten.png", "color": "#002244"}, {"data": {"x": 0.01047914359671062, "y": 0.7642276422764228}, "name": "WAS", "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png", "color": "#5A1414"}]
+const lista = [
+  {
+    data: { x: -0.07608184816683525, y: 0.08934066656895684 },
+    name: "ARI",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/ari.png",
+    color: "#97233F",
+  },
+  {
+    data: { x: -0.0757795346298359, y: -0.06300411411514557 },
+    name: "ATL",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/atl.png",
+    color: "#A71930",
+  },
+  {
+    data: { x: 0.0895406940046106, y: -0.13206726413516354 },
+    name: "BAL",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/bal.png",
+    color: "#241773",
+  },
+  {
+    data: { x: 0.10077085598219078, y: -0.05448785446694571 },
+    name: "BUF",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/buf.png",
+    color: "#00338D",
+  },
+  {
+    data: { x: -0.1499832670965615, y: 0.03774575041615967 },
+    name: "CAR",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500-dark/car.png",
+    color: "#0085CA",
+  },
+  {
+    data: { x: -0.05046231682686963, y: -0.040829132802047884 },
+    name: "CHI",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/chi.png",
+    color: "#0B162A",
+  },
+  {
+    data: { x: 0.0018598052083690806, y: 0.047501304419670556 },
+    name: "CIN",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/cin.png",
+    color: "#FB4F14",
+  },
+  {
+    data: { x: -0.11741834533286731, y: -0.16619981545217413 },
+    name: "CLE",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/cle.png",
+    color: "#FF3C00",
+  },
+  {
+    data: { x: 0.11035056236917049, y: -0.07701429804191906 },
+    name: "DAL",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/dal.png",
+    color: "#002244",
+  },
+  {
+    data: { x: -0.04191878203778391, y: 0.013071558692820255 },
+    name: "DEN",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/den.png",
+    color: "#002244",
+  },
+  {
+    data: { x: 0.05285779866584252, y: -0.010735505736906799 },
+    name: "DET",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/det.png",
+    color: "#0076B6",
+  },
+  {
+    data: { x: 0.06467185964485093, y: 0.016969265952239205 },
+    name: "GB",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png",
+    color: "#203731",
+  },
+  {
+    data: { x: -0.03206257724982607, y: -0.03157522621488911 },
+    name: "HOU",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png",
+    color: "#03202F",
+  },
+  {
+    data: { x: -0.02564135372396998, y: -0.021232713802022112 },
+    name: "IND",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/ind.png",
+    color: "#002C5F",
+  },
+  {
+    data: { x: -0.03137572263728747, y: -0.04703111435381354 },
+    name: "JAX",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png",
+    color: "#006778",
+  },
+  {
+    data: { x: 0.029417883243220144, y: -0.06427213841202535 },
+    name: "KC",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/kc.png",
+    color: "#E31837",
+  },
+  {
+    data: { x: 0.03799597813572419, y: -0.01861334543600272 },
+    name: "LA",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/lar.png",
+    color: "#003594",
+  },
+  {
+    data: { x: -0.059599126938021676, y: 0.02708476659025931 },
+    name: "LAC",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png",
+    color: "#007BC7",
+  },
+  {
+    data: { x: -0.0997455021340698, y: -0.055307216785175264 },
+    name: "LV",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/lv.png",
+    color: "#000000",
+  },
+  {
+    data: { x: 0.09686654128694118, y: -0.03673799566630718 },
+    name: "MIA",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/mia.png",
+    color: "#008E97",
+  },
+  {
+    data: { x: -0.026237172349002188, y: -0.027879540787805607 },
+    name: "MIN",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/min.png",
+    color: "#4F2683",
+  },
+  {
+    data: { x: -0.16880075247720877, y: -0.04284157696893784 },
+    name: "NE",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/ne.png",
+    color: "#002244",
+  },
+  {
+    data: { x: -0.02553888574739594, y: -0.07018767353107665 },
+    name: "NO",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/no.png",
+    color: "#D3BC8D",
+  },
+  {
+    data: { x: -0.18144141697775037, y: 0.00977246906620922 },
+    name: "NYG",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png",
+    color: "#0B2265",
+  },
+  {
+    data: { x: -0.22833322031093858, y: -0.08276010233978963 },
+    name: "NYJ",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png",
+    color: "#003F2D",
+  },
+  {
+    data: { x: 0.08173429990228144, y: 0.05896116270584504 },
+    name: "PHI",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png",
+    color: "#004C54",
+  },
+  {
+    data: { x: -0.06431932993707283, y: -0.0434280414129065 },
+    name: "PIT",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png",
+    color: "#000000",
+  },
+  {
+    data: { x: 0.027570839368493173, y: 0.057819756620156815 },
+    name: "SEA",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/sea.png",
+    color: "#002244",
+  },
+  {
+    data: { x: 0.18142694637643056, y: -0.06747662927466229 },
+    name: "SF",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/sf.png",
+    color: "#AA0000",
+  },
+  {
+    data: { x: 0.015370760022012743, y: -0.005928040034026885 },
+    name: "TB",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/tb.png",
+    color: "#A71930",
+  },
+  {
+    data: { x: -0.030809542161843603, y: 0.03696409394739652 },
+    name: "TEN",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/ten.png",
+    color: "#002244",
+  },
+  {
+    data: { x: -0.07160101602698526, y: 0.07626141196386689 },
+    name: "WAS",
+    logo: "https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png",
+    color: "#5A1414",
+  },
+];
 
-export default function Home() 
-{  
-    return (
+export default function Home() {
+  return (
     <>
-    <p className='text-lg font-bold'>EPA</p>
-    <div className=' flex p-4 h-fit max-w-[56rem] mx-auto my-12 bg-black' >
-      <Suspense fallback={<p>Suspense</p>}>
-        <ScatterGraph lista={lista} />
-      </Suspense>
-    </div>
-    
+      <div className='bg-neutral-900 w-3/4 rounded-lg h-96 mx-auto mt-10'></div>
+      <div>
+        <p className="font-bold text-xl mx-auto w-fit mt-10">EPA/play - 2023 season </p>
+        <p className="my-1 mx-auto w-fit">Data: nfl-verse</p>
+
+        <Suspense
+          fallback={
+            <div className="aspect-video animate-pulse rounded-3xl bg-neutral-800/50 dark:bg-neutral-50/10  min-w-0 "></div>
+          }
+        >
+          <ScatterGraph lista={lista} />
+        </Suspense>
+        <p className=" text-sm my-1 mx-auto w-fit">Win probability: 0-100%; Win probability (vegas): 0-100%; Quarters: 1-4; </p>
+      </div>
+      
     </>
-  )
+  );
 }
