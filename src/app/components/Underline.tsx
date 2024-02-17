@@ -24,7 +24,7 @@ export default function Underline({ selected }: { selected: string }) {
       {selected == parts[1] && (
         <motion.span
           layoutId="underline"
-          className="absolute left-0 top-full block -mt-3 h-[1px] w-full bg-lime-500"
+          className="absolute left-0 top-full block -mt-3 h-[1px] w-full bg-[#16ff00]"
           style={
             pathname != prevPathname
               ? {
