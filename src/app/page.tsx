@@ -9,7 +9,11 @@ import { Separator } from "@/components/ui/separator";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import NflSvg from "./components/svg/NflSvg";
+import TeamSvg from "./components/svg/TeamSvg";
+import HelmetSvg from "./components/svg/HelmetSvg";
+
 export default function Menu() {
+
   const ref = useRef<HTMLDivElement>(null);
   const view = useInView(ref, { margin: "-60% 0px -50% 0px" });
 
@@ -40,7 +44,7 @@ export default function Menu() {
           </h3>
           <motion.button
             className="inline-flex items-center justify-center px-6 py-3 align-bottom w-fit mx-auto rounded-sm border border-[#16ff00] bg-transparent font-bold"
-            variants={{ hover: { scale: 1.1 } }}
+            variants={{ hover: { backgroundColor: '#16ff0010' } }}
             whileHover="hover"
           >
             Get started{" "}
@@ -108,35 +112,54 @@ export default function Menu() {
       <div className="flex flex-col justify-center gap-5 items-center ">
         <MotionLink
           href="/general/home"
-          className="px-8 py-4 flex items-center justify-center  rounded-xl border-[#9c9c9c] "
+          className="px-6 py-4 flex items-center justify-center "
           initial="rest"
           whileHover="hover"
         >
           <NflSvg></NflSvg>
-          <div className='flex flex-col items-center justify-center px-4'>
-          <p className="font-bold text-xl self-start">General</p>
-          <motion.p
-            className=""
-            variants={{ rest: { opacity: 0.8 }, hover: { opacity: 1 } }}
-          >
-            League-wide team stats
-          </motion.p>
+          <div className="flex flex-col items-center justify-center ps-4">
+            <p className="font-bold text-lg self-start">General</p>
+            <motion.p
+              className="w-48"
+              variants={{ rest: { opacity: 0.8 }, hover: { opacity: 1 } }}
+            >
+              League-wide statistics
+            </motion.p>
           </div>
         </MotionLink>
         <MotionLink
           href="/teams/home"
-          className="px-8 py-4 flex flex-col items-center justify-center border rounded-xl border-[#16ff00] 
-          "
+          className="px-6 py-4 flex items-center justify-center "
+          initial="rest"
+          whileHover="hover"
         >
-          <p className="font-bold text-xl pb-1">Teams</p>
-          <p>League-wide team stats</p>
+          <TeamSvg></TeamSvg>
+          <div className="flex flex-col items-center justify-center ps-4">
+            <p className="font-bold text-lg self-start">Teams</p>
+            <motion.p
+              className="w-48"
+              variants={{ rest: { opacity: 0.8 }, hover: { opacity: 1 } }}
+            >
+              Specific team statistics
+            </motion.p>
+          </div>
         </MotionLink>
         <MotionLink
-          href="/players/home"
-          className="px-8 py-4 flex flex-col items-center justify-center border rounded-xl border-[#16ff00] "
+          href="/teams/home"
+          className="px-6 py-4 flex items-center justify-center "
+          initial="rest"
+          whileHover="hover"
         >
-          <p className="font-bold text-xl pb-1">Home</p>
-          <p>League-wide team stats</p>
+          <HelmetSvg></HelmetSvg>
+          <div className="flex flex-col items-center justify-center ps-4">
+            <p className="font-bold text-lg self-start">Players</p>
+            <motion.p
+              className="w-48"  
+              variants={{ rest: { opacity: 0.8 }, hover: { opacity: 1 } }}
+            >
+              Players statistics
+            </motion.p>
+          </div>
         </MotionLink>
       </div>
       <div className=" bg-black h-screen"></div>
