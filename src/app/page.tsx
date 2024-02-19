@@ -5,7 +5,6 @@ import { useInView, motion } from "framer-motion";
 import StatsSvg from "./components/svg/StatsSvg";
 import ChartSvg from "./components/svg/ChartSvg";
 import FilterSvg from "./components/svg/FilterSvg";
-import { Separator } from "@/components/ui/separator";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import NflSvg from "./components/svg/NflSvg";
