@@ -95,7 +95,7 @@ export default function NavBar() {
 
   return (
     <motion.header
-      className="sticky z-10 backdrop-blur top-0 bg-neutral-800/70 border-b border-neutral-700 text-white text-sm"
+      className="sticky z-10 backdrop-blur top-0 bg-black/70 border-b border-neutral-700 text-white text-sm"
       variants={{
         visible: { y: 0, opacity: 1 },
         hidden: { y: -20 },
