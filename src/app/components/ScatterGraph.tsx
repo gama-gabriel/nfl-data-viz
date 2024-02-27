@@ -17,7 +17,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import annotationPlugin from "chartjs-plugin-annotation";
 import Img from "next/image";
 import { motion, useMotionValue } from "framer-motion";
-import logo from "../../../public/logo.svg";
+
 
 const MotionImage = motion(Img);
 ChartJS.register(LinearScale, PointElement, LineElement);
@@ -190,7 +190,6 @@ const ScatterGraph = ({ lista }) => {
         )}
       </div>
       
-      <div className="h-12"></div>
     </>
   );
 };

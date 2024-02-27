@@ -201,21 +201,32 @@ const lista = [
 export default function Home() {
   return (
     <>
-      <div className='bg-neutral-900 w-3/4 rounded-lg h-96 mx-auto mt-10'></div>
-      <div>
-        <p className="font-bold text-xl mx-auto w-fit mt-10">EPA/play - 2023 season </p>
-        <p className="my-1 mx-auto w-fit">Data: nfl-verse</p>
+      <div className="grid flex-1 grid-cols-[16rem_minmax(0,1fr)] divide-x-[1px] divide-neutral-600">
+        <aside className="fixed-top-14 h-screen w-full">Texto</aside>
+        <div className="flex w-full flex-col items-center">
+          <div className="px-8 py-6">
+            <h1 className="text-4xl font-bold">EPA</h1>
+          </div>
+          <div className="flex w-full flex-col items-center gap-0">
+            <p className="mt-10 w-fit text-xl font-bold">
+              EPA/play - 2023 season{" "}
+            </p>
+            <p className="my-1 w-fit">Data: nfl-verse</p>
 
-        <Suspense
-          fallback={
-            <div className="aspect-video animate-pulse rounded-3xl bg-neutral-800/50 dark:bg-neutral-50/10  min-w-0 "></div>
-          }
-        >
-          <ScatterGraph lista={lista} />
-        </Suspense>
-        <p className=" text-sm my-1 mx-auto w-fit">Win probability: 0-100%; Win probability (vegas): 0-100%; Quarters: 1-4; </p>
+            <Suspense
+              fallback={
+                <div className="aspect-video min-w-0 animate-pulse rounded-3xl bg-neutral-800/50  dark:bg-neutral-50/10 "></div>
+              }
+            >
+              <ScatterGraph lista={lista} />
+            </Suspense>
+            <p className="w-fit text-sm">
+              Win probability: 0-100%; Win probability (vegas): 0-100%;
+              Quarters: 1-4;{" "}
+            </p>
+          </div>
+        </div>
       </div>
-      
     </>
   );
 }

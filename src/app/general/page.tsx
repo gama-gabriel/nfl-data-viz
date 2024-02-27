@@ -73,31 +73,54 @@ export default function Home() {
         </motion.h3>
       </div>
       <div className="flex w-full flex-col items-center justify-center">
-        <h2 className="p-12 text-2xl">
+        <motion.h2
+          className="p-12 text-2xl"
+          initial={{ opacity: 0, x: -15 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.3, delay: 0.15 },
+          }}
+        >
           Explore and visualize league-wide teams data
-        </h2>
-        <div className="flex w-[90%] columns-3 items-start justify-center gap-10">
+        </motion.h2>
+        <div className="bg flex w-[90%] columns-3 items-start justify-center gap-12 pb-12 2xl:gap-24">
           {links.map((category) => (
-            <motion.ul
+            <motion.div
               key={category.label}
-              className="flex w-full flex-col items-center justify-center gap-5 rounded-xl border border-neutral-700 py-4 "
-              variants={{ rest: { opacity: 1, transition: { staggerChildren: 0.05, delay: 0.1 } } }}
-              initial='hidden'
+              className="flex w-full flex-col items-center justify-center gap-5 rounded-xl border border-neutral-700 pb-4"
+              variants={{
+                hidden: { opacity: 0 },
+                rest: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delay: 0.4,
+                    delayChildren: 0.5,
+                  },
+                },
+              }}
+              initial="hidden"
               animate="rest"
             >
-              <h2 className="w-full border-b border-neutral-700 pb-4 text-center text-xl font-bold">
+              <h2 className="w-full rounded-t-xl border-b border-neutral-700 bg-neutral-950 py-4 text-center text-xl font-bold">
                 {category.label}
               </h2>
               {category.items.map((item) => (
-                <motion.li
+                <MotionLink
                   key={item.text}
-                  
-                  variants={{ hidden: { opacity: 0 }, rest: { opacity: 1 } }}
+                  href={`/general${category.ref}/${item.ref}`}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    rest: { opacity: 0.7 },
+                  }}
+                  whileHover={{ opacity: 1 }}
+                  className="underline decoration-neutral-500 "
                 >
                   {item.text}
-                </motion.li>
+                </MotionLink>
               ))}
-            </motion.ul>
+            </motion.div>
           ))}
         </div>
       </div>
