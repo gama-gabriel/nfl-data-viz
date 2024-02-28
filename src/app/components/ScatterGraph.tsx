@@ -18,7 +18,6 @@ import annotationPlugin from "chartjs-plugin-annotation";
 import Img from "next/image";
 import { motion, useMotionValue } from "framer-motion";
 
-
 const MotionImage = motion(Img);
 ChartJS.register(LinearScale, PointElement, LineElement);
 
@@ -34,11 +33,11 @@ const ScatterGraph = ({ lista }) => {
 
   const xAverage = getAverage(
     lista.map((item) => item.data),
-    "x"
+    "x",
   );
   const yAverage = getAverage(
     lista.map((item) => item.data),
-    "y"
+    "y",
   );
 
   let data = {};
@@ -131,7 +130,7 @@ const ScatterGraph = ({ lista }) => {
       Tooltip,
       Legend,
       annotationPlugin,
-      ChartDataLabels
+      ChartDataLabels,
     );
     ChartJS.unregister(ChartDataLabels);
     if (chartRef != null) {
@@ -179,17 +178,24 @@ const ScatterGraph = ({ lista }) => {
   return (
     <>
       <div
-        className={`py-4 px-1 aspect-video md:w-[70%] ${
+        className={`flex w-[70%] flex-col items-center gap-2 rounded-lg px-4 pt-3 ${
           dark ? `bg-neutral-900` : `bg-white`
-        } rounded-lg w-full mx-auto my-2 min-w-0`}
+        }`}
       >
-        {loading ? (
-          <div className="aspect-video animate-pulse rounded-3xl bg-neutral-800/50 dark:bg-neutral-50/10  min-w-0 "></div>
-        ) : (
-          <Scatter options={options} data={data} ref={chartRef} />
-        )}
+        <p className="w-fit text-xl font-bold">EPA/play - 2023 season</p>
+        <p className="my-1 w-fit">Data: nfl-verse</p>
+        <div
+          className={`aspect-video ${
+            dark ? `bg-neutral-900` : `bg-white`
+          } mx-auto my-2 w-full `}
+        >
+          {loading ? (
+            <div className="aspect-video min-w-0 animate-pulse rounded-3xl bg-neutral-800/50  dark:bg-neutral-50/10 "></div>
+          ) : (
+            <Scatter options={options} data={data} ref={chartRef} />
+          )}
+        </div>
       </div>
-      
     </>
   );
 };

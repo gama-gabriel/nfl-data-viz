@@ -207,9 +207,10 @@ export default function Home() {
           <div className="px-8 py-6">
             <h1 className="text-4xl font-bold">EPA</h1>
           </div>
-          <div className="flex w-full flex-col items-center gap-0">
+          <div className="flex w-full flex-col items-center gap-0 ">
+            
             <p className="mt-10 w-fit text-xl font-bold">
-              EPA/play - 2023 season{" "}
+              EPA/play - 2023 season
             </p>
             <p className="my-1 w-fit">Data: nfl-verse</p>
 
