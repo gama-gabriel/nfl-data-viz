@@ -17,6 +17,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import annotationPlugin from "chartjs-plugin-annotation";
 import Img from "next/image";
 import { motion, useMotionValue } from "framer-motion";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const MotionImage = motion(Img);
 ChartJS.register(LinearScale, PointElement, LineElement);
@@ -178,23 +179,26 @@ const ScatterGraph = ({ lista }) => {
   return (
     <>
       <div
-        className={`flex w-[70%] flex-col items-center gap-2 rounded-lg px-4 pt-3 ${
+        className={`flex w-full flex-col items-center rounded-lg px-4 py-4 ${
           dark ? `bg-neutral-900` : `bg-white`
         }`}
       >
         <p className="w-fit text-xl font-bold">EPA/play - 2023 season</p>
-        <p className="my-1 w-fit">Data: nfl-verse</p>
-        <div
-          className={`aspect-video ${
-            dark ? `bg-neutral-900` : `bg-white`
-          } mx-auto my-2 w-full `}
-        >
-          {loading ? (
-            <div className="aspect-video min-w-0 animate-pulse rounded-3xl bg-neutral-800/50  dark:bg-neutral-50/10 "></div>
-          ) : (
-            <Scatter options={options} data={data} ref={chartRef} />
-          )}
+        <p className="w-fit pb-1">Data: nfl-verse</p>
+        <div className={` ${dark ? `bg-neutral-900` : `bg-white`} w-full py-2`}>
+          <AspectRatio ratio={2 / 1}>
+            {loading ? (
+              <div className="h-full w-full animate-pulse rounded-3xl bg-neutral-700"></div>
+            ) : (
+              <Scatter options={options} data={data} ref={chartRef} />
+            )}
+          </AspectRatio>
         </div>
+
+        <p className="w-fit text-sm">
+          Win probability: 0-100%; Win probability (vegas): 0-100%; Quarters:
+          1-4
+        </p>
       </div>
     </>
   );

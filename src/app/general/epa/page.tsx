@@ -203,17 +203,12 @@ export default function Home() {
     <>
       <div className="grid flex-1 grid-cols-[16rem_minmax(0,1fr)] divide-x-[1px] divide-neutral-600">
         <aside className="fixed-top-14 h-screen w-full">Texto</aside>
-        <div className="flex w-full flex-col items-center">
-          <div className="px-8 py-6">
-            <h1 className="text-4xl font-bold">EPA</h1>
+        <div className="flex w-full flex-col items-start gap-12 px-20 py-8">
+          <div className="py-4">
+            <h1 className="text-3xl font-bold">Expected points added (EPA)</h1>
           </div>
-          <div className="flex w-full flex-col items-center gap-0 ">
-            
-            <p className="mt-10 w-fit text-xl font-bold">
-              EPA/play - 2023 season
-            </p>
-            <p className="my-1 w-fit">Data: nfl-verse</p>
-
+          <div className="flex w-full flex-col items-start gap-6">
+            <h2 className="text-2xl font-bold">EPA/play scatter plot</h2>
             <Suspense
               fallback={
                 <div className="aspect-video min-w-0 animate-pulse rounded-3xl bg-neutral-800/50  dark:bg-neutral-50/10 "></div>
@@ -221,10 +216,10 @@ export default function Home() {
             >
               <ScatterGraph lista={lista} />
             </Suspense>
-            <p className="w-fit text-sm">
-              Win probability: 0-100%; Win probability (vegas): 0-100%;
-              Quarters: 1-4;{" "}
-            </p>
+          </div>
+          <div className="flex w-full flex-col items-start gap-6">
+            <h2 className="text-2xl font-bold">EPA table</h2>
+            
           </div>
         </div>
       </div>
