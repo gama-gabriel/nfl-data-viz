@@ -1,7 +1,10 @@
-import React, { Suspense } from "react";
+"use client";
+import React, { Suspense, useState } from "react";
 import ScatterGraph from "@/app/components/ScatterGraph";
 import { Skeleton } from "@/components/ui/skeleton";
-import Img from "next/image";
+import { useMotionValueEvent, useScroll, motion } from "framer-motion";
+import NavitemWrapper from "@/app/components/NavitemWrapper";
+import Link from "next/link";
 
 const lista = [
   {
@@ -198,16 +201,54 @@ const lista = [
   },
 ];
 
+const MotionLink = motion(Link);
+
 export default function Home() {
+  const ScrollLink = ({ href, children }) => {
+    const handleClick = (e) => {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    return (
+      <Link href={href} className="ps-2 " onClick={handleClick}>
+        {children}
+      </Link>
+    );
+  };
+
+  const { scrollY } = useScroll();
+
+  const [hidden, setHidden] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (previous != undefined) {
+      if (latest > previous && latest > 150) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+    }
+  });
   return (
     <>
-      <div className="grid flex-1 grid-cols-[16rem_minmax(0,1fr)] divide-x-[1px] divide-neutral-600">
-        <aside className="fixed-top-14 h-screen w-full">Texto</aside>
-        <div className="flex w-full flex-col items-start gap-12 px-20 py-8">
+      <div className="grid flex-1 grid-cols-[minmax(0,1fr)_13rem]">
+        <div className="flex w-full flex-col items-start gap-12 border-neutral-600 px-20 py-8">
           <div className="py-4">
             <h1 className="text-3xl font-bold">Expected points added (EPA)</h1>
           </div>
-          <div className="flex w-full flex-col items-start gap-6">
+          <div
+            className="flex w-full scroll-m-28 flex-col items-start gap-6"
+            id="scatter-plot"
+          >
             <h2 className="text-2xl font-bold">EPA/play scatter plot</h2>
             <Suspense
               fallback={
@@ -217,11 +258,48 @@ export default function Home() {
               <ScatterGraph lista={lista} />
             </Suspense>
           </div>
-          <div className="flex w-full flex-col items-start gap-6">
+          <div className="flex w-full flex-col items-start gap-6" id="table">
             <h2 className="text-2xl font-bold">EPA table</h2>
-            
+          </div>
+          <div className="flex w-full flex-col items-start gap-6">
+            <h2 className="text-2xl font-bold" id="glossary">
+              Glossary
+            </h2>
           </div>
         </div>
+        <motion.aside
+          className="sticky top-20 flex h-[calc(100vh-5rem)] w-full flex-col items-start gap-4 py-8 pe-10 text-sm"
+          variants={{
+            visible: { top: "5rem", opacity: 1 },
+            hidden: { top: "3.5rem" },
+          }}
+          animate={hidden ? "hidden" : "visible"}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="py-2">
+            <NavitemWrapper initial={0.9}>
+              <button className=" font-bold">General</button>
+            </NavitemWrapper>
+          </div>
+          <div className="flex flex-col items-start gap-3">
+            <p className=" font-bold">On this page</p>
+            <div className="flex flex-col items-start gap-2">
+              <NavitemWrapper initial={0.6}>
+                <ScrollLink href="#scatter-plot">
+                  EPA/play scatter plot
+                </ScrollLink>
+              </NavitemWrapper>
+
+              <NavitemWrapper initial={0.6}>
+                <ScrollLink href="#table">EPA/table</ScrollLink>
+              </NavitemWrapper>
+
+              <NavitemWrapper initial={0.6}>
+                <ScrollLink href="#glossary">Glossary</ScrollLink>
+              </NavitemWrapper>
+            </div>
+          </div>
+        </motion.aside>
       </div>
     </>
   );

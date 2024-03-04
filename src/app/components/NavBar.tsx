@@ -32,7 +32,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           {...props}
           href={props.href!}
-          className="text-sm mx-auto block select-none space-y-1 rounded-md py-4 px-2 leading-none no-underline outline-none transition-colors hover:bg-neutral-950 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:bg-neutral-950"
+          className="hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground mx-auto block select-none space-y-1 rounded-md px-2 py-4 text-sm leading-none no-underline outline-none transition-colors hover:bg-neutral-950 focus:bg-neutral-950"
         >
           {title}
         </Link>
@@ -93,9 +93,10 @@ export default function NavBar() {
     }
   });
 
+  
   return (
     <motion.header
-      className="sticky z-10 backdrop-blur top-0 bg-black/70 border-b border-neutral-700 text-white text-sm"
+      className="sticky top-0 z-10 border-b border-neutral-700 bg-black/90 text-sm text-white backdrop-blur"
       variants={{
         visible: { y: 0, opacity: 1 },
         hidden: { y: -20 },
@@ -103,8 +104,8 @@ export default function NavBar() {
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.2 }}
     >
-      <div className="m-0 px-6 py-2 w-full gap-4 flex">
-        <Link className="mx-12 my-auto group" href="/">
+      <div className="flex w-full gap-4 px-6 py-2">
+        <Link className="group my-auto px-12" href="/">
           <NavitemWrapper initial={0.9}>
             <MotionImage
               src={logo}
@@ -112,10 +113,10 @@ export default function NavBar() {
               height={20}
               alt={"NFL data viz logo"}
               priority
-              className="cursor-pointer my-auto mx-12 z-10"
+              className="z-10 mx-12 my-auto cursor-pointer"
               variants={{
                 visible: { scale: 1, opacity: 1 },
-                hidden: { scale: 0, opacity: 0,  transition: { duration: 0.2} },
+                hidden: { scale: 1, opacity: 0 },
               }}
               animate={hidden ? "hidden" : "visible"}
               transition={{ duration: 0.2 }}
@@ -152,7 +153,7 @@ export default function NavBar() {
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
-                      <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                      <div className="relative flex cursor-pointer py-3 text-sm font-bold text-stone-200 decoration-1 underline-offset-4">
                         <Underline selected="" />
                         Home
                       </div>
@@ -167,14 +168,14 @@ export default function NavBar() {
               <NavigationMenuItem>
                 <NavitemWrapper className="">
                   <NavigationMenuTrigger>
-                    <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                    <div className="relative flex cursor-pointer py-3 text-sm font-bold text-stone-200 decoration-1 underline-offset-4">
                       <Underline selected={"general"} />
                       General
                     </div>
                   </NavigationMenuTrigger>
                 </NavitemWrapper>
                 <NavigationMenuContent className="">
-                  <ul className="grid px-4 py-3 w-56">
+                  <ul className="grid w-56 px-4 py-3">
                     <ListItem
                       href="/general"
                       title="Home"
@@ -203,14 +204,14 @@ export default function NavBar() {
               <NavigationMenuItem>
                 <NavitemWrapper className="">
                   <NavigationMenuTrigger>
-                    <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                    <div className="relative flex cursor-pointer py-3 text-sm font-bold text-stone-200 decoration-1 underline-offset-4">
                       <Underline selected={"teams"} />
                       Teams
                     </div>
                   </NavigationMenuTrigger>
                 </NavitemWrapper>
                 <NavigationMenuContent>
-                  <ul className="grid px-4 py-3 w-56">
+                  <ul className="grid w-56 px-4 py-3">
                     <ListItem
                       href="/teams"
                       title="Home"
@@ -238,14 +239,14 @@ export default function NavBar() {
               <NavigationMenuItem>
                 <NavitemWrapper className="">
                   <NavigationMenuTrigger>
-                    <div className="flex relative py-3 font-bold text-sm cursor-pointer underline-offset-4 decoration-1 text-stone-200">
+                    <div className="relative flex cursor-pointer py-3 text-sm font-bold text-stone-200 decoration-1 underline-offset-4">
                       <Underline selected={"players"} />
                       Players
                     </div>
                   </NavigationMenuTrigger>
                 </NavitemWrapper>
                 <NavigationMenuContent>
-                  <ul className="grid px-4 py-3 w-56">
+                  <ul className="grid w-56 px-4 py-3">
                     <ListItem
                       href="/players"
                       title="Home"
