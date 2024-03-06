@@ -17,7 +17,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { useMotionValueEvent, useScroll, motion } from "framer-motion";
+import { useMotionValueEvent, useScroll, motion,  } from "framer-motion";
 
 const MotionImage = motion(Image);
 
@@ -47,8 +47,7 @@ export default function NavBar() {
     title: "Offensive situations",
     href: "offense",
     content: [
-      { text: "Pass", ref: "pass" },
-      { text: "Run", ref: "run" },
+      { text: "Pass", ref: "pass" },{ text: "Run", ref: "run" },
       { text: "Dropback vs Rush", ref: "dropback_rush" },
       { text: "Success rate", ref: "success_rate" },
       { text: "Early downs", ref: "early_downs" },
@@ -85,7 +84,7 @@ export default function NavBar() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     if (previous != undefined) {
-      if (latest > previous && latest > 150) {
+      if (latest > 100) {
         setHidden(true);
       } else {
         setHidden(false);
@@ -102,7 +101,7 @@ export default function NavBar() {
         hidden: { y: -20 },
       }}
       animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.3 }}
     >
       <div className="flex w-full gap-4 px-6 py-2">
         <Link className="group my-auto px-12" href="/">
@@ -116,10 +115,10 @@ export default function NavBar() {
               className="z-10 mx-12 my-auto cursor-pointer"
               variants={{
                 visible: { scale: 1, opacity: 1 },
-                hidden: { scale: 1, opacity: 0 },
+                hidden: { scale: 0, opacity: 0, transition: { duration: 0.3 } },
               }}
               animate={hidden ? "hidden" : "visible"}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
             />
 
             <motion.p
@@ -129,7 +128,7 @@ export default function NavBar() {
                 hidden: { y: -9 },
               }}
               animate={hidden ? "hidden" : "visible"}
-              transition={{ ease: "easeInOut", duration: 0.2 }}
+              transition={{ duration: 0.3 }}
             >
               <span>nfl</span>
               <span className="font-bold"> data viz</span>
@@ -142,7 +141,7 @@ export default function NavBar() {
             hidden: { y: 10 },
           }}
           animate={hidden ? "hidden" : "visible"}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3 }}
           className="flex gap-3"
         >
           <NavigationMenu className="">

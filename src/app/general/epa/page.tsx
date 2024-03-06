@@ -204,21 +204,21 @@ const lista = [
 const MotionLink = motion(Link);
 
 export default function Home() {
-  const ScrollLink = ({ href, children }) => {
-    const handleClick = (e) => {
+  const ScrollLink = ({ href, children }: {href: string, children: React.ReactNode}) => {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>)=> {
       e.preventDefault();
       const targetId = href.substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop,
+          top: targetElement.offsetTop - 80,
           behavior: "smooth",
         });
       }
     };
 
     return (
-      <Link href={href} className="ps-2 " onClick={handleClick}>
+      <Link href={href} className="ps-2" >
         {children}
       </Link>
     );
@@ -246,7 +246,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold">Expected points added (EPA)</h1>
           </div>
           <div
-            className="flex w-full scroll-m-28 flex-col items-start gap-6"
+            className="flex w-full scroll-m-20 flex-col items-start gap-6"
             id="scatter-plot"
           >
             <h2 className="text-2xl font-bold">EPA/play scatter plot</h2>
@@ -274,7 +274,7 @@ export default function Home() {
             hidden: { top: "3.5rem" },
           }}
           animate={hidden ? "hidden" : "visible"}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3 }}
         >
           <div className="py-2">
             <NavitemWrapper initial={0.9}>
