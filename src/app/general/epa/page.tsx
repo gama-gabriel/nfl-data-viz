@@ -201,29 +201,7 @@ const lista = [
   },
 ];
 
-const MotionLink = motion(Link);
-
-export default function Home() {
-  const ScrollLink = ({ href, children }: {href: string, children: React.ReactNode}) => {
-    const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>)=> {
-      e.preventDefault();
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 80,
-          behavior: "smooth",
-        });
-      }
-    };
-
-    return (
-      <Link href={href} className="ps-2" >
-        {children}
-      </Link>
-    );
-  };
-
+const Sidebar = () => {
   const { scrollY } = useScroll();
 
   const [hidden, setHidden] = useState(false);
@@ -231,7 +209,7 @@ export default function Home() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     if (previous != undefined) {
-      if (latest > previous && latest > 150) {
+      if (latest > 100) {
         setHidden(true);
       } else {
         setHidden(false);
@@ -239,14 +217,56 @@ export default function Home() {
     }
   });
   return (
+    <motion.aside
+      className="sticky top-20 flex h-[calc(100vh-5rem)] w-full flex-col items-start gap-4 py-8 pe-10 text-sm"
+      variants={{
+        visible: { top: "5rem", opacity: 1 },
+        hidden: { top: "3.5rem" },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="py-2">
+        <NavitemWrapper initial={0.9}>
+          <button className=" font-bold">General</button>
+        </NavitemWrapper>
+      </div>
+      <div className="flex flex-col items-start gap-3">
+        <p className=" font-bold">On this page</p>
+        <div className="flex flex-col items-start gap-2">
+          <NavitemWrapper initial={0.6}>
+            <Link className="ps-2" href="#scatter-plot">
+              EPA/play scatter plot
+            </Link>
+          </NavitemWrapper>
+
+          <NavitemWrapper initial={0.6}>
+            <Link className="ps-2" href="#table">
+              EPA/table
+            </Link>
+          </NavitemWrapper>
+
+          <NavitemWrapper initial={0.6}>
+            <Link className="ps-2" href="#glossary">
+              Glossary
+            </Link>
+          </NavitemWrapper>
+        </div>
+      </div>
+    </motion.aside>
+  );
+};
+
+export default function Home() {
+  return (
     <>
       <div className="grid flex-1 grid-cols-[minmax(0,1fr)_13rem]">
-        <div className="flex w-full flex-col items-start gap-12 border-neutral-600 px-20 py-8">
+        <div className=" flex w-full flex-col items-start divide-y divide-neutral-700 px-20 py-8">
           <div className="py-4">
             <h1 className="text-3xl font-bold">Expected points added (EPA)</h1>
           </div>
           <div
-            className="flex w-full scroll-m-20 flex-col items-start gap-6"
+            className="flex w-full scroll-m-20 flex-col items-start gap-6 pb-6 pt-12"
             id="scatter-plot"
           >
             <h2 className="text-2xl font-bold">EPA/play scatter plot</h2>
@@ -258,48 +278,30 @@ export default function Home() {
               <ScatterGraph lista={lista} />
             </Suspense>
           </div>
-          <div className="flex w-full flex-col items-start gap-6" id="table">
+          <div
+            className="flex w-full scroll-m-20 flex-col items-start gap-6 py-6"
+            id="table"
+          >
             <h2 className="text-2xl font-bold">EPA table</h2>
+            <div className="h-[48rem] w-full rounded-lg bg-neutral-900"></div>
           </div>
-          <div className="flex w-full flex-col items-start gap-6">
-            <h2 className="text-2xl font-bold" id="glossary">
-              Glossary
-            </h2>
+
+          <div
+            className="flex w-full flex-col items-start gap-6 py-6"
+            id="glossary"
+          >
+            <h2 className="scroll-m-20 text-2xl font-bold">Glossary</h2>
+            <h3 className="font-bold">EPA</h3>
+            <p>
+              Expected Points Added (EPA) represents the difference in expected
+              points relative to the team's previous play. It utilizes the
+              expected points model to account for factors such as down and
+              distance, field position, and the clock, offering valuable context
+              for quantifying team performance. For further understanding of the EPA model, including examples, applications, and a more detailed explanation, you can refer to <Link href="https://www.nfeloapp.com/analysis/expected-points-added-epa-nfl/" target="blank" className='text-blue-300 underline'>this article</Link>.
+            </p>
           </div>
         </div>
-        <motion.aside
-          className="sticky top-20 flex h-[calc(100vh-5rem)] w-full flex-col items-start gap-4 py-8 pe-10 text-sm"
-          variants={{
-            visible: { top: "5rem", opacity: 1 },
-            hidden: { top: "3.5rem" },
-          }}
-          animate={hidden ? "hidden" : "visible"}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="py-2">
-            <NavitemWrapper initial={0.9}>
-              <button className=" font-bold">General</button>
-            </NavitemWrapper>
-          </div>
-          <div className="flex flex-col items-start gap-3">
-            <p className=" font-bold">On this page</p>
-            <div className="flex flex-col items-start gap-2">
-              <NavitemWrapper initial={0.6}>
-                <ScrollLink href="#scatter-plot">
-                  EPA/play scatter plot
-                </ScrollLink>
-              </NavitemWrapper>
-
-              <NavitemWrapper initial={0.6}>
-                <ScrollLink href="#table">EPA/table</ScrollLink>
-              </NavitemWrapper>
-
-              <NavitemWrapper initial={0.6}>
-                <ScrollLink href="#glossary">Glossary</ScrollLink>
-              </NavitemWrapper>
-            </div>
-          </div>
-        </motion.aside>
+        <Sidebar />
       </div>
     </>
   );
