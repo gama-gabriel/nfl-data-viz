@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import React, { Suspense, useState } from "react";
 import ScatterGraph from "@/app/components/ScatterGraph";
