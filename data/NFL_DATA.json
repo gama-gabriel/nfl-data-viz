@@ -1,0 +1,419 @@
+[
+    {
+      "def_epa": 0.09087397158145905,
+      "off_epa": -0.058020513504743576,
+      "id": "ARI",
+      "team": {
+        "name": "Arizona Cardinals",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ari.png"
+      },
+      "def_total_epa": 99.32524871826172,
+      "off_total_epa": -65.21505737304688,
+      "def_total_plays": 1093.0,
+      "off_total_plays": 1124.0
+    },
+    {
+      "def_epa": -0.0459866002202034,
+      "off_epa": -0.088897705078125,
+      "id": "ATL",
+      "team": {
+        "name": "Atlanta Falcons",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/atl.png"
+      },
+      "def_total_epa": -51.55097961425781,
+      "off_total_epa": -99.12094116210938,
+      "def_total_plays": 1121.0,
+      "off_total_plays": 1115.0
+    },
+    {
+      "def_epa": -0.12212152034044266,
+      "off_epa": 0.06560652703046799,
+      "id": "BAL",
+      "team": {
+        "name": "Baltimore Ravens",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/bal.png"
+      },
+      "def_total_epa": -154.9722137451172,
+      "off_total_epa": 81.08966827392578,
+      "def_total_plays": 1269.0,
+      "off_total_plays": 1236.0
+    },
+    {
+      "def_epa": -0.04210368171334267,
+      "off_epa": 0.1057911217212677,
+      "id": "BUF",
+      "team": {
+        "name": "Buffalo Bills",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/buf.png"
+      },
+      "def_total_epa": -49.30341339111328,
+      "off_total_epa": 135.73001098632812,
+      "def_total_plays": 1171.0,
+      "off_total_plays": 1283.0
+    },
+    {
+      "def_epa": 0.02912270650267601,
+      "off_epa": -0.15672871470451355,
+      "id": "CAR",
+      "team": {
+        "name": "Carolina Panthers",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/car.png"
+      },
+      "def_total_epa": 29.6177921295166,
+      "off_total_epa": -179.45437622070312,
+      "def_total_plays": 1017.0,
+      "off_total_plays": 1145.0
+    },
+    {
+      "def_epa": -0.025701554492115974,
+      "off_epa": -0.053238317370414734,
+      "id": "CHI",
+      "team": {
+        "name": "Chicago Bears",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/chi.png"
+      },
+      "def_total_epa": -27.269350051879883,
+      "off_total_epa": -59.680152893066406,
+      "def_total_plays": 1061.0,
+      "off_total_plays": 1121.0
+    },
+    {
+      "def_epa": 0.03305060416460037,
+      "off_epa": 0.002213041065260768,
+      "id": "CIN",
+      "team": {
+        "name": "Cincinnati Bengals",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/cin.png"
+      },
+      "def_total_epa": 35.8929557800293,
+      "off_total_epa": 2.3679540157318115,
+      "def_total_plays": 1086.0,
+      "off_total_plays": 1070.0
+    },
+    {
+      "def_epa": -0.13791419565677643,
+      "off_epa": -0.1337149441242218,
+      "id": "CLE",
+      "team": {
+        "name": "Cleveland Browns",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/cle.png"
+      },
+      "def_total_epa": -149.22315979003906,
+      "off_total_epa": -173.29457092285156,
+      "def_total_plays": 1082.0,
+      "off_total_plays": 1296.0
+    },
+    {
+      "def_epa": -0.060322679579257965,
+      "off_epa": 0.12015287578105927,
+      "id": "DAL",
+      "team": {
+        "name": "Dallas Cowboys",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/dal.png"
+      },
+      "def_total_epa": -66.8978500366211,
+      "off_total_epa": 151.03216552734375,
+      "def_total_plays": 1109.0,
+      "off_total_plays": 1257.0
+    },
+    {
+      "def_epa": 0.01974182017147541,
+      "off_epa": -0.0440097413957119,
+      "id": "DEN",
+      "team": {
+        "name": "Denver Broncos",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/den.png"
+      },
+      "def_total_epa": 22.051612854003906,
+      "off_total_epa": -46.298248291015625,
+      "def_total_plays": 1117.0,
+      "off_total_plays": 1052.0
+    },
+    {
+      "def_epa": 0.018001260235905647,
+      "off_epa": 0.07228605449199677,
+      "id": "DET",
+      "team": {
+        "name": "Detroit Lions",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png"
+      },
+      "def_total_epa": 22.789594650268555,
+      "off_total_epa": 97.58617401123047,
+      "def_total_plays": 1266.0,
+      "off_total_plays": 1350.0
+    },
+    {
+      "def_epa": 0.023996520787477493,
+      "off_epa": 0.09118033945560455,
+      "id": "GB",
+      "team": {
+        "name": "Green Bay Packers",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png"
+      },
+      "def_total_epa": 30.091636657714844,
+      "off_total_epa": 109.5075912475586,
+      "def_total_plays": 1254.0,
+      "off_total_plays": 1201.0
+    },
+    {
+      "def_epa": -0.03278811648488045,
+      "off_epa": -0.021559780463576317,
+      "id": "HOU",
+      "team": {
+        "name": "Houston Texans",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png"
+      },
+      "def_total_epa": -41.640907287597656,
+      "off_total_epa": -26.238252639770508,
+      "def_total_plays": 1270.0,
+      "off_total_plays": 1217.0
+    },
+    {
+      "def_epa": -0.015195813961327076,
+      "off_epa": -0.02369057387113571,
+      "id": "IND",
+      "team": {
+        "name": "Indianapolis Colts",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ind.png"
+      },
+      "def_total_epa": -17.611948013305664,
+      "off_total_epa": -26.912492752075195,
+      "def_total_plays": 1159.0,
+      "off_total_plays": 1136.0
+    },
+    {
+      "def_epa": -0.03807791694998741,
+      "off_epa": -0.03196578100323677,
+      "id": "JAX",
+      "team": {
+        "name": "Jacksonville Jaguars",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png"
+      },
+      "def_total_epa": -41.65724182128906,
+      "off_total_epa": -36.69671630859375,
+      "def_total_plays": 1094.0,
+      "off_total_plays": 1148.0
+    },
+    {
+      "def_epa": -0.06932887434959412,
+      "off_epa": 0.03052843175828457,
+      "id": "KC",
+      "team": {
+        "name": "Kansas City Chiefs",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/kc.png"
+      },
+      "def_total_epa": -93.03935241699219,
+      "off_total_epa": 42.342933654785156,
+      "def_total_plays": 1342.0,
+      "off_total_plays": 1387.0
+    },
+    {
+      "def_epa": -0.0018414976075291634,
+      "off_epa": 0.05479535833001137,
+      "id": "LA",
+      "team": {
+        "name": "Los Angeles Rams",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lar.png"
+      },
+      "def_total_epa": -2.1453447341918945,
+      "off_total_epa": 65.53524780273438,
+      "def_total_plays": 1165.0,
+      "off_total_plays": 1196.0
+    },
+    {
+      "def_epa": 0.018342746421694756,
+      "off_epa": -0.06904703378677368,
+      "id": "LAC",
+      "team": {
+        "name": "Los Angeles Chargers",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png"
+      },
+      "def_total_epa": 20.782331466674805,
+      "off_total_epa": -78.92076110839844,
+      "def_total_plays": 1133.0,
+      "off_total_plays": 1143.0
+    },
+    {
+      "def_epa": -0.0565607026219368,
+      "off_epa": -0.08559763431549072,
+      "id": "LV",
+      "team": {
+        "name": "Las Vegas Raiders",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/lv.png"
+      },
+      "def_total_epa": -63.00862121582031,
+      "off_total_epa": -88.07996368408203,
+      "def_total_plays": 1114.0,
+      "off_total_plays": 1029.0
+    },
+    {
+      "def_epa": -0.021669084206223488,
+      "off_epa": 0.07588427513837814,
+      "id": "MIA",
+      "team": {
+        "name": "Miami Dolphins",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/mia.png"
+      },
+      "def_total_epa": -25.28782081604004,
+      "off_total_epa": 86.50807189941406,
+      "def_total_plays": 1167.0,
+      "off_total_plays": 1140.0
+    },
+    {
+      "def_epa": -0.01807987503707409,
+      "off_epa": -0.02402142621576786,
+      "id": "MIN",
+      "team": {
+        "name": "Minnesota Vikings",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/min.png"
+      },
+      "def_total_epa": -20.068660736083984,
+      "off_total_epa": -26.73584747314453,
+      "def_total_plays": 1110.0,
+      "off_total_plays": 1113.0
+    },
+    {
+      "def_epa": -0.05268378555774689,
+      "off_epa": -0.1905049830675125,
+      "id": "NE",
+      "team": {
+        "name": "New England Patriots",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ne.png"
+      },
+      "def_total_epa": -58.479000091552734,
+      "off_total_epa": -198.88720703125,
+      "def_total_plays": 1110.0,
+      "off_total_plays": 1044.0
+    },
+    {
+      "def_epa": -0.0838945060968399,
+      "off_epa": -0.010942885652184486,
+      "id": "NO",
+      "team": {
+        "name": "New Orleans Saints",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/no.png"
+      },
+      "def_total_epa": -91.61280059814453,
+      "off_total_epa": -12.420175552368164,
+      "def_total_plays": 1092.0,
+      "off_total_plays": 1135.0
+    },
+    {
+      "def_epa": -0.007214172277599573,
+      "off_epa": -0.16589780151844025,
+      "id": "NYG",
+      "team": {
+        "name": "New York Giants",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png"
+      },
+      "def_total_epa": -8.05823040008545,
+      "off_total_epa": -181.160400390625,
+      "def_total_plays": 1117.0,
+      "off_total_plays": 1092.0
+    },
+    {
+      "def_epa": -0.10744723677635193,
+      "off_epa": -0.22729837894439697,
+      "id": "NYJ",
+      "team": {
+        "name": "New York Jets",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png"
+      },
+      "def_total_epa": -120.34090423583984,
+      "off_total_epa": -248.6644287109375,
+      "def_total_plays": 1120.0,
+      "off_total_plays": 1094.0
+    },
+    {
+      "def_epa": 0.06530608981847763,
+      "off_epa": 0.05005203187465668,
+      "id": "PHI",
+      "team": {
+        "name": "Philadelphia Eagles",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png"
+      },
+      "def_total_epa": 79.80403900146484,
+      "off_total_epa": 59.91228103637695,
+      "def_total_plays": 1222.0,
+      "off_total_plays": 1197.0
+    },
+    {
+      "def_epa": -0.04172058030962944,
+      "off_epa": -0.06717045605182648,
+      "id": "PIT",
+      "team": {
+        "name": "Pittsburgh Steelers",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png"
+      },
+      "def_total_epa": -49.18856430053711,
+      "off_total_epa": -74.5592041015625,
+      "def_total_plays": 1179.0,
+      "off_total_plays": 1110.0
+    },
+    {
+      "def_epa": 0.06709635257720947,
+      "off_epa": 0.03248676657676697,
+      "id": "SEA",
+      "team": {
+        "name": "Seattle Seahawks",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/sea.png"
+      },
+      "def_total_epa": 79.03950500488281,
+      "off_total_epa": 33.526344299316406,
+      "def_total_plays": 1178.0,
+      "off_total_plays": 1032.0
+    },
+    {
+      "def_epa": -0.03608252480626106,
+      "off_epa": 0.17017628252506256,
+      "id": "SF",
+      "team": {
+        "name": "San Francisco 49ers",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/sf.png"
+      },
+      "def_total_epa": -46.907283782958984,
+      "off_total_epa": 210.84841918945312,
+      "def_total_plays": 1300.0,
+      "off_total_plays": 1239.0
+    },
+    {
+      "def_epa": -0.015570355579257011,
+      "off_epa": 0.019418060779571533,
+      "id": "TB",
+      "team": {
+        "name": "Tampa Bay Buccaneers",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/tb.png"
+      },
+      "def_total_epa": -19.322811126708984,
+      "off_total_epa": 23.57352638244629,
+      "def_total_plays": 1241.0,
+      "off_total_plays": 1214.0
+    },
+    {
+      "def_epa": 0.03211789205670357,
+      "off_epa": -0.022159922868013382,
+      "id": "TEN",
+      "team": {
+        "name": "Tennessee Titans",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/ten.png"
+      },
+      "def_total_epa": 36.646514892578125,
+      "off_total_epa": -22.89120101928711,
+      "def_total_plays": 1141.0,
+      "off_total_plays": 1033.0
+    },
+    {
+      "def_epa": 0.09183883666992188,
+      "off_epa": -0.08150853216648102,
+      "id": "WAS",
+      "team": {
+        "name": "Washington Commanders",
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png"
+      },
+      "def_total_epa": 105.89017486572266,
+      "off_total_epa": -89.98542022705078,
+      "def_total_plays": 1153.0,
+      "off_total_plays": 1104.0
+    }
+  ]
+  
