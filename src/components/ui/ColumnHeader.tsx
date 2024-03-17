@@ -4,7 +4,6 @@ import {
   CaretDownIcon,
   CaretSortIcon,
 } from "@radix-ui/react-icons";
-import { cn } from "@/lib/utils";
 import { Column } from "@tanstack/react-table";
 import { motion } from "framer-motion";
 
@@ -16,6 +15,7 @@ interface DataTableColumnHeaderProps<TData, TValue>
 
 const MotionArrowDown = motion(CaretDownIcon);
 const MotionArrowUp = motion(CaretUpIcon);
+const MotionSort = motion(CaretSortIcon);
 
 export function DataTableColumnHeader<TData, TValue>({
   column,
@@ -25,31 +25,35 @@ export function DataTableColumnHeader<TData, TValue>({
   if (!column.getCanSort()) {
     return <div>{title}</div>;
   }
-
+  
   return (
     <div className="flex items-center justify-center">
       <motion.button
-        className="inline-flex items-center gap-1 py-2 rounded-md px-3 mx-auto"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="mx-auto inline-flex items-center gap-1 rounded-md px-3 py-2"
+        onClick={column.getToggleSortingHandler() }
         whileTap={{ scale: 0.95 }}
-        whileHover={{ backgroundColor: "#d4d4d4" }}
-        initial={{ backgroundColor: "#d4d4d400" }}
+        whileHover={{ backgroundColor: "#262626" }}
+        initial={{ backgroundColor: "#26262600" }}
       >
         {title}
-        {column.getIsSorted() === "desc" ? (
-          <MotionArrowDown
-            initial={{ rotate: 180 }}
-            animate={{ rotate: 0, transition: { duration: 0.3 } }}
-            className="h-4 w-4"
-          />
-        ) : column.getIsSorted() === "asc" ? (
+        {column.getIsSorted() === "asc" ? (
           <MotionArrowUp
             initial={{ rotate: 180 }}
             animate={{ rotate: 0, transition: { duration: 0.3 } }}
-            className="h-4 w-4"
+            className="h-8 w-8"
+          />
+        ) : column.getIsSorted() === "desc" ? (
+          <MotionArrowDown
+            initial={{ rotate: 180 }}
+            animate={{ rotate: 0, transition: { duration: 0.3 } }}
+            className="h-8 w-8"
           />
         ) : (
-          <CaretSortIcon className="h-4 w-4" />
+          <MotionSort
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1, transition: { duration: 0.3 } }}
+            className="h-8 w-8"
+          />
         )}
       </motion.button>
     </div>
