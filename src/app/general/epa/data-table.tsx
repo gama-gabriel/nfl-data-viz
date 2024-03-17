@@ -55,16 +55,17 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
     state: {
       sorting,
     },
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    enableSortingRemoval: true,
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border border-neutral-700 dark:border-neutral-700">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
