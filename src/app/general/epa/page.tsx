@@ -7,6 +7,11 @@ import { useMotionValueEvent, useScroll, motion } from "framer-motion";
 import NavitemWrapper from "@/app/components/NavitemWrapper";
 import Link from "next/link";
 
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
+import mockData from "@/data/NFL_DATA.json";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 const lista = [
   {
     data: { x: -0.07608184816683525, y: 0.08934066656895684 },
@@ -284,7 +289,10 @@ export default function Home() {
             id="table"
           >
             <h2 className="text-2xl font-bold">EPA table</h2>
-            <div className="h-[48rem] w-full rounded-lg bg-neutral-900"></div>
+            <ScrollArea className="h-[550px] w-full rounded-md">
+              <DataTable columns={columns} data={mockData} />
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
           </div>
 
           <div
@@ -298,7 +306,17 @@ export default function Home() {
               points relative to the team's previous play. It utilizes the
               expected points model to account for factors such as down and
               distance, field position, and the clock, offering valuable context
-              for quantifying team performance. For further understanding of the EPA model, including examples, applications, and a more detailed explanation, you can refer to <Link href="https://www.nfeloapp.com/analysis/expected-points-added-epa-nfl/" target="blank" className='text-blue-300 underline'>this article</Link>.
+              for quantifying team performance. For further understanding of the
+              EPA model, including examples, applications, and a more detailed
+              explanation, you can refer to{" "}
+              <Link
+                href="https://www.nfeloapp.com/analysis/expected-points-added-epa-nfl/"
+                target="blank"
+                className="text-blue-300 underline"
+              >
+                this article
+              </Link>
+              .
             </p>
           </div>
         </div>
