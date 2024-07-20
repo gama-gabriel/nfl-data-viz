@@ -8,44 +8,41 @@ import {
   LineElement,
   Tooltip,
   Legend,
-  Title,
-  SubTitle,
+  ChartOptions,
+  ChartData
 } from "chart.js";
 import { useRef, useState, useEffect } from "react";
 import { Scatter } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import annotationPlugin from "chartjs-plugin-annotation";
-import Img from "next/image";
-import { motion, useMotionValue } from "framer-motion";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
-const MotionImage = motion(Img);
 ChartJS.register(LinearScale, PointElement, LineElement);
 
-const ScatterGraph = ({ lista }) => {
+const ScatterGraph = ({ lista }: {lista: any}) => {
   const chartRef = useRef(null);
   const [loading, setLoading] = useState(true);
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
 
-  const getAverage = (data, key) => {
-    const sum = data.reduce((acc, point) => acc + point[key], 0);
+  const getAverage = (data: any, key: any) => {
+    const sum = data.reduce((acc: any, point: any) => acc + point[key], 0);
     return sum / data.length;
   };
 
   const xAverage = getAverage(
-    lista.map((item) => item.data),
+    lista.map((item: any) => item.data),
     "x",
   );
   const yAverage = getAverage(
-    lista.map((item) => item.data),
+    lista.map((item: any) => item.data),
     "y",
   );
 
-  let data = {};
+  let data!: ChartData<"scatter"> ;
 
   if (typeof window !== "undefined" && typeof document !== "undefined") {
     data = {
-      datasets: lista.map((item) => ({
+      datasets: lista.map((item: any) => ({
         data: [item.data],
         label: item.name,
         backgroundColor: item.color,
@@ -59,7 +56,7 @@ const ScatterGraph = ({ lista }) => {
     };
   }
 
-  const options = {
+  const options: ChartOptions<'scatter'> = {
     responsive: true,
     maintainAspectRatio: false,
 
@@ -73,6 +70,12 @@ const ScatterGraph = ({ lista }) => {
           display: true,
           text: `Offensive EPA/play`,
         },
+        ticks: {
+          color: dark ? "#ffffff" : "#000000",
+        },
+        grid: {
+          color: dark ? "#222222" : "#dddddd",
+        },
       },
 
       y: {
@@ -83,14 +86,14 @@ const ScatterGraph = ({ lista }) => {
           display: true,
           text: `Defensive EPA/play`,
           font: {
-            size: "10rem",
+            size: 10,
           },
         },
-
         ticks: {
-          color: "white",
-          textStrokeColor: "#241773",
-          textStrokeWidth: 1,
+          color: dark ? "#ffffff" : "#000000",
+        },
+        grid: {
+          color: dark ? "#222222" : "#dddddd",
         },
       },
     },
@@ -100,21 +103,19 @@ const ScatterGraph = ({ lista }) => {
         annotations: {
           line1: {
             type: "line",
-            mode: "vertical",
             scaleID: "x",
             value: xAverage,
-            borderColor: `${dark ? `#ffffff30` : `#000000`}`,
+            borderColor: dark ? "#aaaaaa" : "#666666",
             borderWidth: 1,
-            drawTime: "beforeDraw",
+            drawTime: "beforeDatasetsDraw",
           },
           line2: {
             type: "line",
-            mode: "horizontal",
             scaleID: "y",
             value: yAverage,
-            borderColor: `${dark ? `#ffffff30` : `#000000`}`,
+            borderColor: dark ? "#aaaaaa" : "#666666",
             borderWidth: 1,
-            drawTime: "beforeDraw",
+            drawTime: "beforeDatasetsDraw",
           },
         },
       },
@@ -124,6 +125,7 @@ const ScatterGraph = ({ lista }) => {
     },
   };
   useEffect(() => {
+    //avoiding conflicts with other charts that require different plugins
     ChartJS.register(
       LinearScale,
       PointElement,
@@ -137,55 +139,37 @@ const ScatterGraph = ({ lista }) => {
     if (chartRef != null) {
       setLoading(false);
     }
-  }, []);
+    //seting dark mode variable for chart config colors
+    const checkDarkMode = () => {
+      // Check if the html tag contains the dark class
+      const htmlHasDarkClass =
+        document.documentElement.classList.contains("dark");
+      // Update the state based on whether the dark class is present or not
+      setDark(htmlHasDarkClass);
+    };
 
-  const container = {
-    hidden: {
-      opacity: 1,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
-  const son = {
-    hidden: { height: 0 },
-    visible: {
-      height: "auto",
-      transition: {
-        duration: 3,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-  const draw = {
-    hidden: { stroke: 0, opacity: 0 },
-    visible: (i) => {
-      const delay = 1 + i * 0.5;
-      return {
-        stroke: 1,
-        opacity: 1,
-        transition: {
-          stroke: { delay, type: "spring", duration: 1.5, bounce: 0 },
-          opacity: { delay, duration: 0.01 },
-        },
-      };
-    },
-  };
-  const pathLength = useMotionValue(0);
+    // Call the function once to initialize the state
+    checkDarkMode();
+
+    // Listen for changes to the class and re-run the checkDarkMode function
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Clean up the observer
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
-      <div
-        className={`flex w-full flex-col items-center rounded-lg px-4 py-4 ${
-          dark ? `bg-neutral-900` : `bg-white`
-        }`}
-      >
+      <div className="flex w-full flex-col items-center rounded-lg border border-neutral-300 bg-white px-4 py-4 dark:border-none dark:bg-neutral-900">
         <p className="w-fit text-xl font-bold">EPA/play - 2023 season</p>
         <p className="w-fit pb-1">Data: nfl-verse</p>
-        <div className={` ${dark ? `bg-neutral-900` : `bg-white`} w-full py-2`}>
+        <div className="w-full py-2">
           <AspectRatio ratio={2 / 1}>
             {loading ? (
               <div className="h-full w-full animate-pulse rounded-3xl bg-neutral-700"></div>

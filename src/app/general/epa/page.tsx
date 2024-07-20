@@ -207,7 +207,7 @@ const lista = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ children }: { children?: React.ReactNode }) => {
   const { scrollY } = useScroll();
 
   const [hidden, setHidden] = useState(false);
@@ -230,35 +230,9 @@ const Sidebar = () => {
         hidden: { top: "3.5rem" },
       }}
       animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, delay: 0.2 }}
     >
-      <div className="py-2">
-        <NavitemWrapper initial={0.9}>
-          <button className=" font-bold">General</button>
-        </NavitemWrapper>
-      </div>
-      <div className="flex flex-col items-start gap-3">
-        <p className=" font-bold">On this page</p>
-        <div className="flex flex-col items-start gap-2">
-          <NavitemWrapper initial={0.6}>
-            <Link className="ps-2" href="#scatter-plot">
-              EPA/play scatter plot
-            </Link>
-          </NavitemWrapper>
-
-          <NavitemWrapper initial={0.6}>
-            <Link className="ps-2" href="#table">
-              EPA/table
-            </Link>
-          </NavitemWrapper>
-
-          <NavitemWrapper initial={0.6}>
-            <Link className="ps-2" href="#glossary">
-              Glossary
-            </Link>
-          </NavitemWrapper>
-        </div>
-      </div>
+      {children}
     </motion.aside>
   );
 };
@@ -266,16 +240,21 @@ const Sidebar = () => {
 export default function Home() {
   return (
     <>
-      <div className="grid flex-1 grid-cols-[minmax(0,1fr)_13rem]">
-        <div className=" flex w-full flex-col items-start divide-y divide-neutral-700 px-20 py-8">
-          <div className="py-4">
+      <div className="grid flex-1 grid-cols-[minmax(0,1fr)_13rem] xl:grid-cols-[minmax(0,1fr)_13rem]">
+        {/* <div className="hidden w-full xl:flex">
+          <Sidebar />
+        </div> */}
+        <div className="flex w-full flex-col items-start px-20 py-8">
+          <div className="">
             <h1 className="text-3xl font-bold">Expected points added (EPA)</h1>
           </div>
           <div
             className="flex w-full scroll-m-20 flex-col items-start gap-6 pb-6 pt-12"
             id="scatter-plot"
           >
-            <h2 className="text-2xl font-bold">EPA/play scatter plot</h2>
+            <h2 className="text-2xl font-bold">
+              <span className="pe-4">#</span>EPA/play scatter plot
+            </h2>
             <Suspense
               fallback={
                 <div className="aspect-video min-w-0 animate-pulse rounded-3xl bg-neutral-800/50  dark:bg-neutral-50/10 "></div>
@@ -289,9 +268,9 @@ export default function Home() {
             id="table"
           >
             <h2 className="text-2xl font-bold">EPA table</h2>
-            <ScrollArea className="h-[550px] w-full rounded-md">
+            <ScrollArea className="h-96 w-full">
               <DataTable columns={columns} data={mockData} />
-              <ScrollBar orientation="horizontal" />
+              <ScrollBar orientation="horizontal"></ScrollBar>
             </ScrollArea>
           </div>
 
@@ -301,7 +280,7 @@ export default function Home() {
           >
             <h2 className="scroll-m-20 text-2xl font-bold">Glossary</h2>
             <h3 className="font-bold">EPA</h3>
-            <p>
+            <p className="">
               Expected Points Added (EPA) represents the difference in expected
               points relative to the team's previous play. It utilizes the
               expected points model to account for factors such as down and
@@ -312,7 +291,7 @@ export default function Home() {
               <Link
                 href="https://www.nfeloapp.com/analysis/expected-points-added-epa-nfl/"
                 target="blank"
-                className="text-blue-300 underline"
+                className="text-blue-900 underline dark:text-blue-300"
               >
                 this article
               </Link>
@@ -320,7 +299,30 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <Sidebar />
+        <Sidebar>
+          <div className="flex flex-col items-start gap-3">
+            <p className=" font-bold">On this page</p>
+            <div className="flex flex-col items-start gap-2">
+              <NavitemWrapper initial={0.7}>
+                <Link className="ps-2 font-medium" href="#scatter-plot">
+                  EPA/play scatter plot
+                </Link>
+              </NavitemWrapper>
+
+              <NavitemWrapper initial={0.7}>
+                <Link className="ps-2 font-medium" href="#table">
+                  EPA/table
+                </Link>
+              </NavitemWrapper>
+
+              <NavitemWrapper initial={0.7}>
+                <Link className="ps-2 font-medium" href="#glossary">
+                  Glossary
+                </Link>
+              </NavitemWrapper>
+            </div>
+          </div>
+        </Sidebar>
       </div>
     </>
   );

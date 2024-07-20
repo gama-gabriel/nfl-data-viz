@@ -20,14 +20,13 @@ export type Epa_table = {
 export const columns: ColumnDef<Epa_table>[] = [
   {
     accessorKey: "team",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Offensive EPA/play" />
+    header: () => (
+      <div className="flex items-center justify-start ps-24">Team</div>
     ),
     cell: ({ row, column, table }) => {
       const team: Epa_table["team"] = row.getValue("team");
       const rowModel = table.getSortedRowModel();
       let index = 0;
-      console.log(table.getState().sorting);
       if (table.getState().sorting[0]?.desc === false) {
         const reversedRows = rowModel?.flatRows?.reverse();
         index =
@@ -38,7 +37,7 @@ export const columns: ColumnDef<Epa_table>[] = [
         index = rowModel?.rows?.findIndex((flatRow) => flatRow.id === row.id);
       }
       return (
-        <div className="min-w-48 flex h-full items-center justify-start gap-4 px-2">
+        <div className="min-w-48 flex h-full items-center justify-start gap-5 px-2">
           <div className="w-6">{index + 1}</div>
           <Image
             height={200}
@@ -124,6 +123,8 @@ export const columns: ColumnDef<Epa_table>[] = [
         </div>
       );
     },
+    invertSorting: true,
+    sortDescFirst: true,
   },
 
   {

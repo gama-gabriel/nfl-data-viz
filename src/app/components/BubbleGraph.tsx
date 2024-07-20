@@ -12,6 +12,8 @@ import {
   Legend,
   Title,
   SubTitle,
+  ChartData,
+  ChartOptions
 } from "chart.js";
 import { useEffect, useState } from "react";
 import { Bubble } from "react-chartjs-2";
@@ -21,9 +23,9 @@ import annotationPlugin from "chartjs-plugin-annotation";
 
 ChartJS.register(LinearScale, PointElement, LineElement, RadialLinearScale);
 
-const BubbleGraph = ({ pre_lista }) => {
+const BubbleGraph = ({ pre_lista }: any) => {
   const [screenSize, setScreenSize] = useState(0.1);
-  const lista = pre_lista.map((item) => ({
+  const lista = pre_lista.map((item: any) => ({
     ...item,
     data: {
       ...item.data,
@@ -32,21 +34,21 @@ const BubbleGraph = ({ pre_lista }) => {
   }));
 
   const getAverage = (data: Array<object>, key: string) => {
-    const sum = data.reduce((acc, point) => acc + point[key], 0);
+    const sum = data.reduce((acc, point: any) => acc + point[key], 0);
     return sum / data.length;
   };
 
   const xAverage = getAverage(
-    lista.map((item) => item.data),
+    lista.map((item: any) => item.data),
     "x"
   );
   const yAverage = getAverage(
-    lista.map((item) => item.data),
+    lista.map((item: any) => item.data),
     "y"
   );
 
   const data = {
-    datasets: lista.map((item) => ({
+    datasets: lista.map((item: any) => ({
       data: [item.data],
       label: item.name,
       backgroundColor: `${item["primary color"]}99`,
@@ -56,7 +58,7 @@ const BubbleGraph = ({ pre_lista }) => {
     })),
   };
 
-  const options = {
+  const options: (ChartOptions<'bubble'> & {annotation?: number})= {
     responsive: true,
     maintainAspectRatio: false,
     devicePixelRatio: 2,
@@ -110,7 +112,6 @@ const BubbleGraph = ({ pre_lista }) => {
         annotations: {
           line1: {
             type: "line",
-            mode: "vertical",
             scaleID: "x",
             value: xAverage,
             borderColor: "#ffffff30",
@@ -119,7 +120,6 @@ const BubbleGraph = ({ pre_lista }) => {
           },
           line2: {
             type: "line",
-            mode: "horizontal",
             scaleID: "y",
             value: yAverage,
             borderColor: "#ffffff30",

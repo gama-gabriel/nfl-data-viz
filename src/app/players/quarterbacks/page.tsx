@@ -65,27 +65,11 @@ function Home() {
   
   
   
-  const getAverage = (data, key) => {
-    const sum = data.reduce((acc, point) => acc + point[key], 0)
-    return sum / data.length
-  };
   
   // const xAverage = getAverage(lista.map(item => item.data), 'x')
   // const yAverage = getAverage(lista.map(item => item.data), 'y')
   
   
-  const data = 
-  {
-    datasets: lista.map(item => (
-    {
-      data: [item.data],
-      label: item.name,
-      backgroundColor: `${item['primary color']}99`,
-      pointStyle: 'circle',
-      borderColor: `${item['secondary color']}60`,
-      borderWidth: 1,
-    })),   
-  };
 
   return (
     

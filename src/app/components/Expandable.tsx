@@ -14,17 +14,16 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 const container = {
-  hidden: { opacity: 0, height: 0, width: 'auto' },
+  hidden: { opacity: 0, height: 0, width: "auto" },
   show: {
     opacity: 1,
-    height: 'auto',
+    height: "auto",
     transition: {
       staggerChildren: 0.1,
       delay: 0.005,
     },
   },
 };
-
 
 const son = {
   hidden: { opacity: 0 },
@@ -41,8 +40,8 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md py-3 px-4 leading-none no-underline outline-none transition-colors hover:bg-neutral-950 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:bg-neutral-950 text-sm",
-            className
+            "hover:text-accent-foreground block select-none space-y-1 rounded-md px-4 py-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-neutral-300 focus:bg-neutral-300  dark:hover:bg-black dark:focus:bg-black",
+            className,
           )}
           {...props}
         >
@@ -54,7 +53,7 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-const Expandable = ({ items }: { items: object }) => {
+const Expandable = ({ items }: { items: any }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -62,7 +61,7 @@ const Expandable = ({ items }: { items: object }) => {
       <Collapsible open={open} onOpenChange={setOpen}>
         <div className="flex w-full items-center">
           <CollapsibleTrigger asChild>
-            <button className="leading-none no-underline outline-none flex w-full rounded-md px-2 justify-between items-center group text-sm hover:bg-neutral-950 focus:bg-neutral-950 group-data-[state=open]:font-bold py-3">
+            <button className="group flex w-full items-center justify-between rounded-md px-2 py-3 text-sm leading-none no-underline outline-none hover:bg-neutral-300 focus:bg-neutral-300  dark:hover:bg-black dark:focus:bg-black group-data-[state=open]:font-bold">
               <span className="sr-only">Toggle</span>
               {items.title}
               <ChevronDownIcon
@@ -74,14 +73,14 @@ const Expandable = ({ items }: { items: object }) => {
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
           <AnimatePresence>
-            <ScrollArea className="h-72">
+            <ScrollArea className="h-[8.5rem]">
               <motion.ul
                 variants={container}
-                initial='hidden'
-                animate='show'
+                initial="hidden"
+                animate="show"
                 exit={{ height: 0, opacity: 0, transition: { delay: 0 } }}
               >
-                {items.content.map((content) => (
+                {items.content.map((content: any) => (
                   <ListItem
                     href={`/${items.href}/${content.ref}`}
                     title={content.text}

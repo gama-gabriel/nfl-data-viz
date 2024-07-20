@@ -33,7 +33,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           {...props}
           href={props.href!}
-          className="hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground mx-auto block select-none space-y-1 rounded-md px-2 py-4 text-sm font-medium leading-none  no-underline outline-none transition-colors hover:bg-neutral-300 focus:bg-neutral-300  dark:hover:bg-black dark:focus:bg-black"
+          className="hover:text-accent-foreground mx-auto block select-none space-y-1 rounded-md px-2 py-4 text-sm font-medium leading-none  no-underline outline-none transition-colors hover:bg-neutral-300 focus:bg-neutral-300  dark:hover:bg-black dark:focus:bg-black"
         >
           {title}
         </Link>
@@ -158,6 +158,7 @@ export default function NavBar() {
 
   return (
     <motion.header
+      
       className="sticky top-0 z-10 w-full border-b border-neutral-400 bg-white/5 text-sm  backdrop-blur supports-[backdrop-filter]:bg-white/10 dark:border-neutral-700 dark:bg-black/95  dark:supports-[backdrop-filter]:bg-black/60"
       variants={{
         visible: { y: 0, opacity: 1 },
