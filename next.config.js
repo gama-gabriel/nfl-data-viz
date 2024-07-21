@@ -27,6 +27,7 @@ module.exports = {
     outputFileTracingExcludes: {
       '/api': ['**/{__pycache__,testing,tests,test_}**/**'],
       '/api': ['data/**'],
+      '/api': ['../node_modules/**'],
     },
   },
 }
