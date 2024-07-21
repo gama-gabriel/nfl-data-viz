@@ -23,8 +23,9 @@ module.exports = {
       },
     ],
   },
-  devIndicators: {
-    hostname: '0.0.0.0',
-    port: 3001
-  }
+  experimental: {
+    outputFileTracingExcludes: {
+      '/api': ['**/{__pycache__,testing,tests,test_}**/**'],
+    },
+  },
 }
