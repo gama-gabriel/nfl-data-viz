@@ -33,7 +33,7 @@ class Command(BaseModel):
     command: str
 
 
-@app.post("/execute")
+@app.post("api/execute")
 async def execute_command(cmd: Command):
     try:
         result = subprocess.run(cmd.command, shell=True, capture_output=True, text=True)
@@ -46,7 +46,7 @@ async def execute_command(cmd: Command):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get('/epa')
+@app.get('api/epa')
 async def read_epa(
     year: int,
     weeks: List[int] | str = Query("all"),
@@ -59,7 +59,7 @@ async def read_epa(
     return(get_epa(year, weeks, quarters, downs, include_playoffs, wp_offset, vegas_wp_offset))
 
 
-@app.get('/tempo')
+@app.get('api/tempo')
 async def return_time():
     print((datetime.datetime.now()))
     return str(datetime.datetime.now())
