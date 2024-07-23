@@ -3,5 +3,5 @@
 		"api/**": {
 			"excludeFiles": "**/{__pycache__,testing,tests,test_}**/**"
 		}
-	},
+	}
 }
