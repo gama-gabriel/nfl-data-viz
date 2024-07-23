@@ -1,9 +1,14 @@
 {
 	"functions": {
 		"api/**": {
-			"excludeFiles": "**/{__pycache__,testing,tests,test_}**/**",
-			"excludeFiles": ".next/**",
-			"excludeFiles": "node_modules/**"
+			"excludeFiles": [
+				"**/{__pycache__,testing,tests,test_}**/**",
+				 ".next/**",
+				 "node_modules/**",
+				"**/node_modules/@next/swc-core-linux-x64-gnu",
+				"**/node_modules/@next/swc-core-linux-x64-musl"
+			]
+
 		}
 	}
 }
