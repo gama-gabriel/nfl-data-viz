@@ -24,8 +24,10 @@ module.exports = {
     ],
   },
   experimental: {
-    outputFileTracingExcludes: {
-      '/api': ['**/{__pycache__,testing,tests,test_}**/**'],
-    },
+    outputFileTracingExcludes: [
+      "**/node_modules/@swc/core-linux-x64-gnu",
+      "**/node_modules/@swc/core-linux-x64-musl",
+      '**/{__pycache__,testing,tests,test_}**/**'
+    ],
   },
 }
