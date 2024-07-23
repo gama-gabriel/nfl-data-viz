@@ -3,7 +3,7 @@
 		"api/**": {
 			"excludeFiles": "**/{__pycache__,testing,tests,test_}**/**",
 			"excludeFiles": ".next/**",
-			"excludeFiles": "node_modules/**",
+			"excludeFiles": "node_modules/**"
 		}
 	}
 }
