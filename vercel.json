@@ -4,10 +4,4 @@
 			"excludeFiles": "**/{__pycache__,testing,tests,test_}**/**"
 		}
 	},
-	"rewrites": [
-		{
-			"source": "/(.*)",
-			"destination": "api/index.py"
-		}
-	]
 }
